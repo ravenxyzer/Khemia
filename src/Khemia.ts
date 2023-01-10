@@ -5,7 +5,6 @@ import "@sapphire/plugin-i18next/register";
 import "dotenv/config";
 
 import language from "./schemas/LanguageSchema";
-import discordModals from "discord-modals";
 import mongoose from "mongoose";
 mongoose.set("strictQuery", false);
 
@@ -28,7 +27,5 @@ const client = new SapphireClient({
         },
     },
 });
-
-discordModals(client);
 
 client.login(process.env.TOKEN);
