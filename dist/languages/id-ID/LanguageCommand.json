@@ -1,8 +1,0 @@
-{
-    "handler": "🛑・Gunakan *slash command* untuk menggunakan perintah ini!",
-    "error": "🛑・Anda sudah menggunakan bahasa ini!",
-    "isDefault": "🛑・Anda sudah menggunakan bahasa *default!*",
-    "list": "Preferensi bahasa pribadi anda dapat diubah menggunakan `/language update`\n**Bahasa yang tersedia:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`",
-    "update": "✅・Berhasil mengubah bahasa menjadi `{{language}}`!",
-    "reset": "✅・Berhasil mengatur ulang bahasa ke default!"
-}
