@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@discordjs/builders": "^1.4.0",
+    "@discordjs/rest": "^1.5.0",
+    "@sapphire/decorators": "^5.0.0",
+    "@sapphire/discord.js-utilities": "^5.1.2",
+    "@sapphire/framework": "^3.1.4",
+    "@sapphire/plugin-i18next": "^4.0.3",
+    "@sapphire/plugin-subcommands": "^3.2.4",
+    "@sapphire/time-utilities": "^1.7.8",
+    "@vermaysha/hoyolab-api": "^1.7.0",
+    "dayjs": "^1.11.7",
+    "discord-modals": "^1.3.9",
+    "discord.js": "^13.12.0",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.8.0"
+  },
+  "devDependencies": {
+    "@sapphire/ts-config": "^3.3.4"
+  },
+  "name": "khemia",
+  "version": "1.0.0",
+  "main": "dist/Khemia.js",
+  "scripts": {
+    "cpl": "tsc --skipLibCheck",
+    "cpl-w": "tsc --skipLibCheck -w",
+    "pm2": "pm2 start dist/Khemia.js",
+    "start": "cls && node ."
+  },
+  "keywords": [],
+  "author": "Zarr#2072",
+  "license": "MIT",
+  "description": "All-multi purpose Discord bot & Genshin Impact utilities."
+}

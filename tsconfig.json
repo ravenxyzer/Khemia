@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {  
+      "module": "commonjs",
+      "declaration": false,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES6",
+      "sourceMap": false,
+      "outDir": "./dist",
+      "baseUrl": "./src",
+      "incremental": false,
+      "skipLibCheck": true,
+      "strictNullChecks": false,
+      "noImplicitAny": false,
+      "strictBindCallApply": false,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": false,
+      "esModuleInterop": true,
+      "lib": ["ESNext"]
+  },
+  "exclude": [".github", ".vscode", "node_modules", "dist"],
+  "include": ["src/**/*", "augment.d.ts", "src/commands/information/.ts"]
+}
