@@ -2,7 +2,6 @@ import { Command, CommandOptionsRunTypeEnum } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, MessageEmbed } from "discord.js";
-import dayjs from "dayjs";
 
 import { Colors, Developers, InviteLink, Utils } from "../../libraries";
 
