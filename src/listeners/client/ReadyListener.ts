@@ -15,13 +15,11 @@ import { Presences, Utils } from "../../libraries";
 })
 export class ReadyListener extends Listener {
     public async run(): Promise<void> {
-        const logger = this.container.logger;
-        const database = process.env.MONGO_URI;
-
+        const { logger, client } = this.container;
         logger.info(`Logged in as ${this.container.client.user.tag}`);
 
         const randomizePresence = (): void => {
-            this.container.client.user.setPresence({
+            client.user.setPresence({
                 activities: [
                     {
                         name: Utils.randomArray(Presences),
@@ -36,11 +34,10 @@ export class ReadyListener extends Listener {
         setInterval(randomizePresence, Time.Minute * 1);
 
         /* Database Connection */
-        if (!database) return;
         mongoose
-            .connect(database)
+            .connect(process.env.MONGO_URI)
             .then(() => {
-                logger.info(`${this.container.client.user.tag} already connected to the database.`);
+                logger.info(`${client.user.tag} already connected to the database.`);
             })
             .catch((err) => {
                 logger.error(err);

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { LanguageInterface } from "../libraries/utils/Interfaces";
+import { LanguageInterface } from "../libraries";
 
 /**
  * @description Language Schema for Mongodb
