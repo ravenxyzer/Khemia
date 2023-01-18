@@ -16,7 +16,7 @@ import { Presences, Utils } from "../../libraries";
 export class ReadyListener extends Listener {
     public async run(): Promise<void> {
         const { logger, client } = this.container;
-        logger.info(`Logged in as ${this.container.client.user.tag}`);
+        logger.info(`Logged in as ${client.user.tag}`);
 
         const randomizePresence = (): void => {
             client.user.setPresence({
