@@ -21,22 +21,24 @@ import "dotenv/config";
 })
 export default class LanguageCommand extends Subcommand {
     public override async messageRun(message: Message): Promise<void> {
-        await message.reply({ content: await resolveKey(message, "LanguageCommand:handler") });
+        await message.reply({ content: await resolveKey(message, "LanguageCommand:IsSlash") });
     }
 
     public async showList(interaction: Subcommand.ChatInputInteraction): Promise<void> {
+        const { client } = this.container;
         await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setAuthor({
-                        name: `${this.container.client.user.username}'s Language List`,
-                        iconURL: this.container.client.user.displayAvatarURL({ size: 512, dynamic: true }),
+                        name: await resolveKey(interaction, "LanguageCommand:Name"),
+                        iconURL: client.user.displayAvatarURL({ size: 512, dynamic: true }),
                     })
-                    .setDescription(await resolveKey(interaction, "LanguageCommand:list"))
+                    .setDescription(await resolveKey(interaction, "LanguageCommand:ListDescription"))
                     .setColor(Colors.default),
             ],
         });
     }
+
     public async updateLanguage(interaction: Subcommand.ChatInputInteraction): Promise<void> {
         const language: string = interaction.options.getString("language");
         const languageCheck = await lang.findOne({
@@ -45,44 +47,44 @@ export default class LanguageCommand extends Subcommand {
 
         if (!languageCheck) {
             if (language == process.env.DEFAULT_LANGUAGE) {
-                await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:error") });
-            } else {
-                await new lang({
-                    userId: interaction.user.id,
-                    language,
-                }).save();
-
-                await interaction.reply({
-                    content: await resolveKey(interaction, "LanguageCommand:update", { language }),
-                });
+                await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsUsed") });
             }
-        } else {
-            if (languageCheck.language == language) {
-                await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:error") });
-            } else {
-                languageCheck.language = language;
-                languageCheck.save();
 
-                await interaction.reply({
-                    content: await resolveKey(interaction, "LanguageCommand:update", { language }),
-                });
-            }
+            await interaction.reply({
+                content: await resolveKey(interaction, "LanguageCommand:UpdateSuccess", { language }),
+            });
+
+            await new lang({
+                userId: interaction.user.id,
+                language,
+            }).save();
         }
+
+        if (languageCheck.language == language) {
+            await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsUsed") });
+        }
+
+        await interaction.reply({
+            content: await resolveKey(interaction, "LanguageCommand:UpdateSuccess", { language }),
+        });
+
+        languageCheck.language = language;
+        languageCheck.save();
     }
+
     public async resetLanguage(interaction: Subcommand.ChatInputInteraction): Promise<void> {
         const languageCheck = await lang.findOne({
             userId: interaction.user.id,
         });
 
         if (!languageCheck) {
-            await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:isDefault") });
-        } else {
-            await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:reset") });
-
-            await lang.findOneAndDelete({
-                userId: interaction.user.id,
-            });
+            await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsDefault") });
         }
+
+        await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:ResetSuccess") });
+        await lang.findOneAndDelete({
+            userId: interaction.user.id,
+        });
     }
 
     public override registerApplicationCommands(registry: Subcommand.Registry): void {

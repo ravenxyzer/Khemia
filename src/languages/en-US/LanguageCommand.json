@@ -1,8 +1,9 @@
 {
-    "handler": "🛑・Use slash command for using this command!",
-    "error": "🛑・You already using this language!",
-    "isDefault": "🛑・You already using the default language!",
-    "list": "Your personal language preferences can be changed using `/language update`\n**Available languages:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`",
-    "update": "✅・Successfully changed the language to `{{language}}`!",
-    "reset": "✅・Succesfully reset the language to default!"
+    "Name": "{{name}}'s Command List",
+    "IsSlash": "🛑・Use slash command for using this command!",
+    "IsUsed": "🛑・You already using this language!",
+    "IsDefault": "🛑・You already using the default language!",
+    "UpdateSuccess": "✅・Successfully changed the language to `{{language}}`!",
+    "ResetSuccess": "✅・Succesfully reset the language to default!",
+    "ListDescription": "Your personal language preferences can be changed using `/language update`\n**Available languages:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`"
 }

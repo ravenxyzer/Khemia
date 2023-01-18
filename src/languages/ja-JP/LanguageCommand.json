@@ -1,8 +1,9 @@
 {
-    "handler": "🛑・このコマンドを使うにはSlash Commandを使おう！",
-    "error": "🛑・あなたはすでにこの言語を使っています！",
-    "isDefault": "🛑・あなたはすでにデフォルトの言語を使用しています!",
-    "list": "個人の言語設定は `/language update` を使用して変更できます\n**利用可能な言語:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`",
-    "update": "✅・言語を `{{language}}` に変更しました！",
-    "reset": "✅・言語をデフォルトに戻すことに成功！"
+    "Name": "{{name}}のコマンドリスト",
+    "IsSlash": "🛑・このコマンドを使うにはSlash Commandを使おう！",
+    "IsUsed": "🛑・あなたはすでにこの言語を使っています！",
+    "IsDefault": "🛑・あなたはすでにデフォルトの言語を使用しています!",
+    "UpdateSuccess": "✅・言語を `{{language}}` に変更しました！",
+    "ResetSuccess": "✅・言語をデフォルトに戻すことに成功！",
+    "ListDescription": "個人の言語設定は `/language update` を使用して変更できます\n**利用可能な言語:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`"
 }
