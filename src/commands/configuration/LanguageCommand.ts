@@ -66,9 +66,7 @@ export default class LanguageCommand extends Subcommand {
             }).save();
         }
 
-        if (languageCheck.language == language) {
-            await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsUsed") });
-        } else {
+        if (languageCheck.language !== language) {
             await interaction.reply({
                 content: await resolveKey(interaction, "LanguageCommand:UpdateSuccess", { language }),
             });
@@ -76,6 +74,7 @@ export default class LanguageCommand extends Subcommand {
             languageCheck.language = language;
             languageCheck.save();
         }
+        await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsUsed") });
     }
 
     public async resetLanguage(interaction: Subcommand.ChatInputInteraction): Promise<void> {
