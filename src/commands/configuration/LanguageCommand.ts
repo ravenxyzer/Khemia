@@ -13,6 +13,7 @@ import "dotenv/config";
 @ApplyOptions<Subcommand.Options>({
     name: "language",
     description: "Language configuration for this bot.",
+    requiredClientPermissions: ["SEND_MESSAGES"],
     subcommands: [
         { name: "list", chatInputRun: "showList" },
         { name: "update", chatInputRun: "updateLanguage" },
@@ -67,14 +68,14 @@ export default class LanguageCommand extends Subcommand {
 
         if (languageCheck.language == language) {
             await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsUsed") });
+        } else {
+            await interaction.reply({
+                content: await resolveKey(interaction, "LanguageCommand:UpdateSuccess", { language }),
+            });
+
+            languageCheck.language = language;
+            languageCheck.save();
         }
-
-        await interaction.reply({
-            content: await resolveKey(interaction, "LanguageCommand:UpdateSuccess", { language }),
-        });
-
-        languageCheck.language = language;
-        languageCheck.save();
     }
 
     public async resetLanguage(interaction: Subcommand.ChatInputInteraction): Promise<void> {
