@@ -25,7 +25,7 @@
     "cpl": "tsc --skipLibCheck",
     "cpl-w": "tsc --skipLibCheck -w",
     "pm2": "pm2 start dist/Khemia.js",
-    "start": "cls && node ."
+    "start": "tsc --skipLibCheck && node ."
   },
   "keywords": [],
   "author": "Zarr#2072",

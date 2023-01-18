@@ -5,5 +5,5 @@
     "IsDefault": "🛑・Anda sudah menggunakan bahasa *default!*",
     "UpdateSuccess": "✅・Berhasil mengubah bahasa menjadi `{{language}}`!",
     "ResetSuccess": "✅・Berhasil mengatur ulang bahasa ke default!",
-    "ListDescription": "Preferensi bahasa pribadi anda dapat diubah menggunakan `/language update`\n**Bahasa yang tersedia:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`"
+    "ListDescription": "Preferensi bahasa pribadi anda dapat diubah menggunakan `/language update`\n**Bahasa yang tersedia:** {{languages}}"
 }

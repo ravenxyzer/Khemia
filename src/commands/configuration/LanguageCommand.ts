@@ -25,15 +25,20 @@ export default class LanguageCommand extends Subcommand {
     }
 
     public async showList(interaction: Subcommand.ChatInputInteraction): Promise<void> {
+        const languages: string[] = [":flag_us: `en-US`", ":flag_id: `id-ID`", ":flag_jp: `ja-JP`"];
         const { client } = this.container;
         await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setAuthor({
-                        name: await resolveKey(interaction, "LanguageCommand:Name"),
+                        name: await resolveKey(interaction, "LanguageCommand:Name", { name: client.user.username }),
                         iconURL: client.user.displayAvatarURL({ size: 512, dynamic: true }),
                     })
-                    .setDescription(await resolveKey(interaction, "LanguageCommand:ListDescription"))
+                    .setDescription(
+                        await resolveKey(interaction, "LanguageCommand:ListDescription", {
+                            languages: languages.join(", "),
+                        })
+                    )
                     .setColor(Colors.default),
             ],
         });

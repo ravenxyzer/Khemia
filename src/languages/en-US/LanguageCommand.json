@@ -5,5 +5,5 @@
     "IsDefault": "🛑・You already using the default language!",
     "UpdateSuccess": "✅・Successfully changed the language to `{{language}}`!",
     "ResetSuccess": "✅・Succesfully reset the language to default!",
-    "ListDescription": "Your personal language preferences can be changed using `/language update`\n**Available languages:** :flag_us: `en-US`, :flag_id: `id-ID`, :flag_jp: `ja-JP`"
+    "ListDescription": "Your personal language preferences can be changed using `/language update`\n**Available languages:** {{languages}}"
 }
