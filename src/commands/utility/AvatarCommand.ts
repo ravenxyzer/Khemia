@@ -3,9 +3,12 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, User, GuildMember } from "discord.js";
 
+/**
+ * @description Avatar Command: Displays the user avatar.
+ */
 @ApplyOptions<Command.Options>({
     name: "avatar",
-    description: "Displays a user avatar.",
+    description: "Displays the user avatar.",
     requiredClientPermissions: ["SEND_MESSAGES"],
 })
 export class AvatarCommand extends Command {
