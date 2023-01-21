@@ -1,50 +1,78 @@
-import { Time } from "@sapphire/time-utilities";
-import { LogLevel } from "@sapphire/framework";
-import type { ClientOptions } from "discord.js";
 import "@sapphire/plugin-i18next/register";
+import { LogLevel, SapphireClient } from "@sapphire/framework";
+import { Time } from "@sapphire/time-utilities";
+import { Partials } from "discord.js";
+import { InternationalizationContext } from "@sapphire/plugin-i18next";
 
-/**
- * @description Khemia client configuration.
- */
-export const IClient: ClientOptions = {
-    allowedMentions: {
-        parse: ["users", "roles"],
-    },
-    caseInsensitiveCommands: true,
-    caseInsensitivePrefixes: true,
-    defaultPrefix: "..",
-    defaultCooldown: {
-        delay: Time.Second * 3,
-    },
-    enableLoaderTraceLoggings: false,
-    intents: [
-        "DIRECT_MESSAGES",
-        "DIRECT_MESSAGE_REACTIONS",
-        "DIRECT_MESSAGE_TYPING",
-        "GUILDS",
-        "GUILD_BANS",
-        "GUILD_EMOJIS_AND_STICKERS",
-        "GUILD_INTEGRATIONS",
-        "GUILD_INVITES",
-        "GUILD_MEMBERS",
-        "GUILD_MESSAGES",
-        "GUILD_MESSAGE_REACTIONS",
-        "GUILD_MESSAGE_TYPING",
-        "GUILD_PRESENCES",
-        "GUILD_SCHEDULED_EVENTS",
-        "GUILD_VOICE_STATES",
-        "GUILD_WEBHOOKS",
-    ],
-    loadDefaultErrorListeners: false,
-    loadMessageCommandListeners: true,
-    logger: {
-        level: LogLevel.Debug,
-    },
-    partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
-    typing: true,
-    ws: {
-        properties: {
-            browser: "Discord iOS",
-        },
-    },
-};
+import language from "./schemas/LanguageSchema";
+
+export class IClient extends SapphireClient {
+    public constructor() {
+        super({
+            allowedMentions: {
+                parse: ["roles", "users"],
+            },
+            caseInsensitiveCommands: false,
+            caseInsensitivePrefixes: false,
+            defaultPrefix: process.env.DEFAULT_PREFIX ?? "..",
+            defaultCooldown: {
+                delay: Time.Second * 3,
+            },
+            enableLoaderTraceLoggings: false,
+            i18n: {
+                fetchLanguage: async (context: InternationalizationContext) => {
+                    const languageCheck = await language.findOne({
+                        userId: context.user.id,
+                    });
+
+                    if (!languageCheck) {
+                        return process.env.DEFAULT_LANGUAGE ?? "en-US";
+                    }
+
+                    return languageCheck.language;
+                },
+            },
+            intents: [
+                "AutoModerationConfiguration",
+                "AutoModerationExecution",
+                "DirectMessageReactions",
+                "DirectMessageTyping",
+                "DirectMessages",
+                "GuildBans",
+                "GuildEmojisAndStickers",
+                "GuildIntegrations",
+                "GuildInvites",
+                "GuildMembers",
+                "GuildMessageReactions",
+                "GuildMessageTyping",
+                "GuildMessages",
+                "GuildPresences",
+                "GuildScheduledEvents",
+                "GuildVoiceStates",
+                "GuildWebhooks",
+                "Guilds",
+                "MessageContent",
+            ],
+            loadDefaultErrorListeners: false,
+            loadMessageCommandListeners: true,
+            logger: {
+                level: LogLevel.Debug,
+            },
+            partials: [Partials.Channel, Partials.GuildMember, Partials.Message, Partials.Reaction],
+            typing: true,
+            ws: {
+                properties: {
+                    browser: "Discord iOS",
+                },
+            },
+        });
+    }
+
+    public login(token: string): Promise<string> {
+        return super.login(token);
+    }
+
+    public destroy(): void {
+        return super.destroy();
+    }
+}

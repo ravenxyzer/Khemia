@@ -17,13 +17,13 @@ export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
             : this.error({ message: "⛔・*Only owner can run this command!" });
     }
 
-    public override async chatInputRun(interaction: Command.ChatInputInteraction) {
+    public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
         return Developers[0].includes(interaction.user.id)
             ? this.ok()
             : this.error({ message: "⛔・Only owner can run this command!" });
     }
 
-    public override async contextMenuRun(interaction: Command.ContextMenuInteraction) {
+    public override async contextMenuRun(interaction: Command.ContextMenuCommandInteraction) {
         return Developers[0].includes(interaction.user.id)
             ? this.ok()
             : this.error({ message: "⛔・Only owner can run this command!" });

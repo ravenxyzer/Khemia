@@ -1,6 +1,7 @@
-import { Listener, Events } from "@sapphire/framework";
+import { Listener, Events, container } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { Time } from "@sapphire/time-utilities";
+import { ActivityType } from "discord.js";
 import mongoose from "mongoose";
 
 import { Presences, Utils } from "../../libraries";
@@ -15,7 +16,7 @@ import { Presences, Utils } from "../../libraries";
 })
 export class ReadyListener extends Listener {
     public async run(): Promise<void> {
-        const { logger, client } = this.container;
+        const { logger, client } = container;
         logger.info(`Logged in as ${client.user.tag}`);
 
         const randomizePresence = (): void => {
@@ -23,7 +24,7 @@ export class ReadyListener extends Listener {
                 activities: [
                     {
                         name: Utils.randomArray(Presences),
-                        type: "WATCHING",
+                        type: ActivityType.Watching,
                     },
                 ],
                 status: "online",

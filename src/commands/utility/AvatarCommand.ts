@@ -9,7 +9,7 @@ import { Message, User, GuildMember } from "discord.js";
 @ApplyOptions<Command.Options>({
     name: "avatar",
     description: "Displays the user avatar.",
-    requiredClientPermissions: ["SEND_MESSAGES"],
+    requiredClientPermissions: ["SendMessages"],
 })
 export class AvatarCommand extends Command {
     public override async messageRun(message: Message, args: Args): Promise<void> {
@@ -19,30 +19,24 @@ export class AvatarCommand extends Command {
         if (user.displayAvatarURL() !== guildUser.displayAvatarURL()) {
             await message.reply({
                 content: await resolveKey(message, "AvatarCommand:WithCustomAvatar", { user: `<@${user.id}>` }),
-                files: [
-                    user.displayAvatarURL({ size: 4096, dynamic: true }),
-                    guildUser.displayAvatarURL({ size: 4096, dynamic: true }),
-                ],
+                files: [user.displayAvatarURL({ size: 4096 }), guildUser.displayAvatarURL({ size: 4096 })],
             });
         }
 
         await message.reply({
             content: await resolveKey(message, "AvatarCommand:NoCustomAvatar", { user: `<@${user.id}>` }),
-            files: [user.displayAvatarURL({ size: 4096, dynamic: true })],
+            files: [user.displayAvatarURL({ size: 4096 })],
         });
     }
 
-    public override async chatInputRun(interaction: Command.ChatInputInteraction): Promise<void> {
+    public override async chatInputRun(interaction: Command.ChatInputCommandInteraction): Promise<void> {
         const user: User = interaction.options.getUser("user") || interaction.user;
         const guildUser: GuildMember = interaction.guild.members.cache.get(user.id);
 
         if (user.displayAvatarURL() !== guildUser.displayAvatarURL()) {
             await interaction.reply({
                 content: await resolveKey(interaction, "AvatarCommand:WithCustomAvatar", { user }),
-                files: [
-                    user.displayAvatarURL({ size: 4096, dynamic: true }),
-                    guildUser.displayAvatarURL({ size: 4096, dynamic: true }),
-                ],
+                files: [user.displayAvatarURL({ size: 4096 }), guildUser.displayAvatarURL({ size: 4096 })],
                 allowedMentions: {
                     parse: ["users"],
                 },
@@ -51,7 +45,7 @@ export class AvatarCommand extends Command {
 
         await interaction.reply({
             content: await resolveKey(interaction, "AvatarCommand:NoCustomAvatar", { user }),
-            files: [user.displayAvatarURL({ size: 4096, dynamic: true })],
+            files: [user.displayAvatarURL({ size: 4096 })],
             allowedMentions: {
                 parse: ["users"],
             },

@@ -1,11 +1,10 @@
 import { Subcommand } from "@sapphire/plugin-subcommands";
 import { ApplyOptions } from "@sapphire/decorators";
-import { Message, MessageEmbed } from "discord.js";
+import { Message, EmbedBuilder } from "discord.js";
 import { resolveKey } from "@sapphire/plugin-i18next";
 
 import { Colors } from "../../libraries";
 import lang from "../../schemas/LanguageSchema";
-import "dotenv/config";
 
 /**
  * @description Language Command: Per user bot language configuration
@@ -13,7 +12,7 @@ import "dotenv/config";
 @ApplyOptions<Subcommand.Options>({
     name: "language",
     description: "Language configuration for this bot.",
-    requiredClientPermissions: ["SEND_MESSAGES"],
+    requiredClientPermissions: ["SendMessages"],
     subcommands: [
         { name: "list", chatInputRun: "showList" },
         { name: "update", chatInputRun: "updateLanguage" },
@@ -25,15 +24,15 @@ export default class LanguageCommand extends Subcommand {
         await message.reply({ content: await resolveKey(message, "LanguageCommand:IsSlash") });
     }
 
-    public async showList(interaction: Subcommand.ChatInputInteraction): Promise<void> {
+    public async showList(interaction: Subcommand.ChatInputCommandInteraction): Promise<void> {
         const languages: string[] = [":flag_us: `en-US`", ":flag_id: `id-ID`", ":flag_jp: `ja-JP`"];
         const { client } = this.container;
         await interaction.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setAuthor({
                         name: await resolveKey(interaction, "LanguageCommand:Name", { name: client.user.username }),
-                        iconURL: client.user.displayAvatarURL({ size: 512, dynamic: true }),
+                        iconURL: client.user.displayAvatarURL({ size: 512 }),
                     })
                     .setDescription(
                         await resolveKey(interaction, "LanguageCommand:ListDescription", {
@@ -45,7 +44,7 @@ export default class LanguageCommand extends Subcommand {
         });
     }
 
-    public async updateLanguage(interaction: Subcommand.ChatInputInteraction): Promise<void> {
+    public async updateLanguage(interaction: Subcommand.ChatInputCommandInteraction): Promise<void> {
         const language: string = interaction.options.getString("language");
         const languageCheck = await lang.findOne({
             userId: interaction.user.id,
@@ -77,7 +76,7 @@ export default class LanguageCommand extends Subcommand {
         await interaction.reply({ content: await resolveKey(interaction, "LanguageCommand:IsUsed") });
     }
 
-    public async resetLanguage(interaction: Subcommand.ChatInputInteraction): Promise<void> {
+    public async resetLanguage(interaction: Subcommand.ChatInputCommandInteraction): Promise<void> {
         const languageCheck = await lang.findOne({
             userId: interaction.user.id,
         });

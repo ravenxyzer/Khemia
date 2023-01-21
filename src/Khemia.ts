@@ -1,31 +1,6 @@
-import { SapphireClient } from "@sapphire/framework";
-import { InternationalizationContext } from "@sapphire/plugin-i18next";
-import { IClient } from "./Config";
-import "@sapphire/plugin-i18next/register";
 import "dotenv/config";
-
-import language from "./schemas/LanguageSchema";
+import { IClient } from "./Config";
 import mongoose from "mongoose";
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", true);
 
-/**
- * @description Khemia client
- */
-const client = new SapphireClient({
-    ...IClient,
-    i18n: {
-        fetchLanguage: async (context: InternationalizationContext) => {
-            const languageCheck = await language.findOne({
-                userId: context.user.id,
-            });
-
-            if (!languageCheck) {
-                return process.env.DEFAULT_LANGUAGE ?? "en-US";
-            }
-
-            return languageCheck.language;
-        },
-    },
-});
-
-client.login(process.env.TOKEN);
+new IClient().login(process.env.TOKEN);

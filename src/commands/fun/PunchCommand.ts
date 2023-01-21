@@ -1,7 +1,7 @@
 import { Args, Command } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
-import { Message, User, MessageEmbed } from "discord.js";
+import { Message, User, EmbedBuilder } from "discord.js";
 
 import { Colors, Gifs, Utils } from "../../libraries";
 
@@ -11,7 +11,8 @@ import { Colors, Gifs, Utils } from "../../libraries";
 @ApplyOptions<Command.Options>({
     name: "punch",
     description: "Punches someone else.",
-    requiredClientPermissions: ["SEND_MESSAGES"],
+    requiredClientPermissions: ["SendMessages"],
+    runIn: ["GUILD_ANY"],
 })
 export class PunchCommand extends Command {
     public override async messageRun(message: Message, args: Args): Promise<void> {
@@ -25,7 +26,7 @@ export class PunchCommand extends Command {
         await this.punch(message, author, target);
     }
 
-    public override async chatInputRun(interaction: Command.ChatInputInteraction): Promise<void> {
+    public override async chatInputRun(interaction: Command.ChatInputCommandInteraction): Promise<void> {
         const author: User = interaction.user;
         const target: User = interaction.options.getUser("user");
 
@@ -33,7 +34,7 @@ export class PunchCommand extends Command {
     }
 
     private async punch(
-        interaction: Message | Command.ChatInputInteraction,
+        interaction: Message | Command.ChatInputCommandInteraction,
         author: User,
         target: User
     ): Promise<void> {
@@ -42,7 +43,7 @@ export class PunchCommand extends Command {
                 author: author.username,
                 target: this.toMention(target.id),
             }),
-            embeds: [new MessageEmbed().setImage(Utils.randomArray(Gifs.punches)).setColor(Colors.default)],
+            embeds: [new EmbedBuilder().setImage(Utils.randomArray(Gifs.punches)).setColor(Colors.default)],
             allowedMentions: {
                 parse: [],
             },
