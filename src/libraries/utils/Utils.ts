@@ -1,3 +1,10 @@
+import timers from "node:timers/promises";
+import { resolveKey } from "@sapphire/plugin-i18next";
+import type { Command, Listener } from "@sapphire/framework";
+import type { Message } from "discord.js";
+
+import { ResponseInterface } from "./Interfaces";
+
 /**
  * @description Custom Utility Functions
  */
@@ -74,5 +81,9 @@ export const Utils = {
         } else {
             return `${this.pad(seconds, 2)}`;
         }
+    },
+
+    wait: function (ms: number): Promise<void> {
+        return timers.setTimeout(ms);
     },
 };

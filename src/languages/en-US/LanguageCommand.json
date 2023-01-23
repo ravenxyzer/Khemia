@@ -1,9 +1,0 @@
-{
-    "Name": "{{name}}'s Command List",
-    "IsSlash": "🛑・Use slash command for using this command!",
-    "IsUsed": "🛑・You already using this language!",
-    "IsDefault": "🛑・You already using the default language!",
-    "UpdateSuccess": "✅・Successfully changed the language to `{{language}}`!",
-    "ResetSuccess": "✅・Succesfully reset the language to default!",
-    "ListDescription": "Your personal language preferences can be changed using `/language update`\n**Available languages:** {{languages}}"
-}

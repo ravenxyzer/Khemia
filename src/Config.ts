@@ -6,14 +6,17 @@ import { InternationalizationContext } from "@sapphire/plugin-i18next";
 
 import language from "./schemas/LanguageSchema";
 
+/**
+ * @description Custom client configurations
+ */
 export class IClient extends SapphireClient {
     public constructor() {
         super({
             allowedMentions: {
                 parse: ["roles", "users"],
             },
-            caseInsensitiveCommands: false,
-            caseInsensitivePrefixes: false,
+            caseInsensitiveCommands: true,
+            caseInsensitivePrefixes: true,
             defaultPrefix: process.env.DEFAULT_PREFIX ?? "..",
             defaultCooldown: {
                 delay: Time.Second * 3,

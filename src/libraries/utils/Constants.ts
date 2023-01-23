@@ -65,3 +65,8 @@ export const Gifs = {
         "https://cdn.discordapp.com/attachments/1053312596889055277/1053316096050081874/Slap-04.gif",
     ],
 };
+
+/**
+ * @description Khemia available Language list
+ */
+export const Languages: string[] = [":flag_us: `en-US`", ":flag_id: `id-ID`", ":flag_jp: `ja-JP`"];

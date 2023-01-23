@@ -4,7 +4,6 @@ import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, User, EmbedBuilder } from "discord.js";
 
 import { Colors, Gifs, Utils } from "../../libraries";
-
 /**
  * @description Punch Command: Punches someone else.
  */
@@ -17,11 +16,7 @@ import { Colors, Gifs, Utils } from "../../libraries";
 export class PunchCommand extends Command {
     public override async messageRun(message: Message, args: Args): Promise<void> {
         const author: User = message.author;
-        const target: User = (await args.pick("user")) ?? undefined;
-
-        if (!target) {
-            message.reply({ content: await resolveKey(message, "PunchCommand:NoTarget") });
-        }
+        const target = await args.pick("user");
 
         await this.punch(message, author, target);
     }
@@ -39,7 +34,7 @@ export class PunchCommand extends Command {
         target: User
     ): Promise<void> {
         await interaction.reply({
-            content: await resolveKey(interaction, "PunchCommand:PunchSuccess", {
+            content: await resolveKey(interaction, "CommandResponse:punch:success", {
                 author: author.username,
                 target: this.toMention(target.id),
             }),

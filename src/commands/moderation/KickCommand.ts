@@ -20,7 +20,7 @@ export class KickCommand extends Command {
             target.kick();
         } catch {
             interaction.reply({
-                content: await resolveKey(interaction, "KickCommand:Failed"),
+                content: "",
             });
         }
     }

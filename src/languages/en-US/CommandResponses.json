@@ -1,0 +1,27 @@
+{
+    "avatar": {
+        "success": "👤・This is {{user}}'s avatar(s)!"
+    },
+    "language": {
+        "name": "{{name}}'s Command List",
+        "listDescription": "Your personal language preferences can be changed using `/language update`.\n**Available languages:** {{languages}}",
+        "success": {
+            "updateSuccess": "✅・Successfully changed the language to `{{language}}`!",
+            "resetSuccess": "✅・Succesfully reset the language to default!"
+        },
+        "error": {
+            "isUsed": "🛑・You already using this language!",
+            "isDefault": "🛑・You already using the default language!"
+        }
+    },
+    "punch": {
+        "success": "💭・{{author}} punches {{target}}!"
+    },
+    "slap": {
+        "success": "💭・{{author}} slaps {{target}}!"
+    }, 
+    "denied": {
+        "slashOnly": "🛑・Use (/) slash command for using this command!",
+        "noTarget": "🛑・Please provide a target!"
+    }
+}

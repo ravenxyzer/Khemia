@@ -17,11 +17,7 @@ import { Colors, Gifs, Utils } from "../../libraries";
 export class PunchCommand extends Command {
     public override async messageRun(message: Message, args: Args): Promise<void> {
         const author: User = message.author;
-        const target: User = (await args.pick("user")) ?? undefined;
-
-        if (!target) {
-            message.reply({ content: await resolveKey(message, "SlapCommand:NoTarget") });
-        }
+        const target: User = await args.pick("user");
 
         await this.slap(message, author, target);
     }
@@ -39,7 +35,7 @@ export class PunchCommand extends Command {
         target: User
     ): Promise<void> {
         await interaction.reply({
-            content: await resolveKey(interaction, "SlapCommand:SlapSuccess", {
+            content: await resolveKey(interaction, "CommandResponse:slap:success", {
                 author: author.username,
                 target: this.toMention(target.id),
             }),
