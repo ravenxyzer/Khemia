@@ -15,10 +15,12 @@
         }
     },
     "punch": {
-        "success": "💭・{{author}} punches {{target}}!"
+        "success": "💭・{{author}} punches {{target}}!",
+        "error": "🛑・Cannot punch yourself!"
     },
     "slap": {
-        "success": "💭・{{author}} slaps {{target}}!"
+        "success": "💭・{{author}} slaps {{target}}!",
+        "error": "🛑・Cannot slap yourself!"
     }, 
     "denied": {
         "slashOnly": "🛑・Use (/) slash command for using this command!",

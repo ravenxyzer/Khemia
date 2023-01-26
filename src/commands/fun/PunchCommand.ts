@@ -1,10 +1,10 @@
 import { Args } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
-import { Message, User, EmbedBuilder } from "discord.js";
+import { Message, User } from "discord.js";
 
 import { ICommand } from "../../structures";
-import { Colors, Gifs } from "../../libraries";
+import { Gifs } from "../../libraries";
 
 /**
  * @description Punch Command: Punches someone else.
@@ -26,33 +26,35 @@ export class PunchCommand extends ICommand {
         await this.punch(message, author, target);
     }
 
-    public override async chatInputRun(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
-        const author: User = interaction.user;
-        const target: User = interaction.options.getUser("user");
+    public override async chatInputRun(ctx: ICommand.ChatInputCommandInteraction): Promise<void> {
+        const author: User = ctx.user;
+        const target: User = ctx.options.getUser("user");
 
-        await this.punch(interaction, author, target);
+        await this.punch(ctx, author, target);
     }
 
     private async punch(
-        interaction: Message | ICommand.ChatInputCommandInteraction,
+        ctx: Message | ICommand.ChatInputCommandInteraction,
         author: User,
         target: User
     ): Promise<void> {
         const { utils } = this.container;
-        await interaction.reply({
-            content: await resolveKey(interaction, "CommandResponse:punch:success", {
-                author: author.username,
-                target: this.toMention(target.id),
-            }),
-            embeds: [new EmbedBuilder().setImage(utils.randomArray(Gifs.punches)).setColor(Colors.default)],
-            allowedMentions: {
-                parse: [],
-            },
-        });
-    }
-
-    private toMention(id: string) {
-        return `<@${id}>`;
+        if (target.id !== author.id) {
+            await ctx.reply({
+                content: await resolveKey(ctx, "CommandResponses:punch:success", {
+                    author: author.username,
+                    target: utils.toMention(target.id),
+                }),
+                embeds: [this.utils.embed().setImage(utils.randomArray(Gifs.punches))],
+                allowedMentions: {
+                    parse: [],
+                },
+            });
+        } else {
+            await ctx.reply({
+                content: await resolveKey(ctx, "CommandResponses:punch:error"),
+            });
+        }
     }
 
     public registerApplicationCommands(registry: ICommand.Registry): void {

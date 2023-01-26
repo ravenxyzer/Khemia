@@ -6,3 +6,11 @@ datasource db {
     provider = "mongodb"
     url      = env("DATABASE_URL")
 }
+
+model User {
+    userId String @id @map("_id")
+    uid    String
+    cookie String @unique
+
+    @@map("User-Register")
+}

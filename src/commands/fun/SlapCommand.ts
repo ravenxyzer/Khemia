@@ -33,26 +33,24 @@ export class PunchCommand extends ICommand {
         await this.slap(interaction, author, target);
     }
 
-    private async slap(
-        interaction: Message | ICommand.ChatInputCommandInteraction,
-        author: User,
-        target: User
-    ): Promise<void> {
+    private async slap(ctx: Message | ICommand.ChatInputCommandInteraction, author: User, target: User): Promise<void> {
         const { utils } = this.container;
-        await interaction.reply({
-            content: await resolveKey(interaction, "CommandResponse:slap:success", {
-                author: author.username,
-                target: this.toMention(target.id),
-            }),
-            embeds: [new EmbedBuilder().setImage(utils.randomArray(Gifs.slaps)).setColor(Colors.default)],
-            allowedMentions: {
-                parse: [],
-            },
-        });
-    }
-
-    private toMention(id: string): string {
-        return `<@${id}>`;
+        if (author.id !== target.id) {
+            await ctx.reply({
+                content: await resolveKey(ctx, "CommandResponses:slap:success", {
+                    author: author.username,
+                    target: utils.toMention(target.id),
+                }),
+                embeds: [this.utils.embed().setImage(utils.randomArray(Gifs.slaps))],
+                allowedMentions: {
+                    parse: [],
+                },
+            });
+        } else {
+            await ctx.reply({
+                content: await resolveKey(ctx, "CommandReponses:slap:error"),
+            });
+        }
     }
 
     public registerApplicationCommands(registry: ICommand.Registry): void {

@@ -121,7 +121,11 @@ export class Utils {
         }
     }
 
-    wait(ms: number) {
-        timers.setTimeout(ms);
+    wait(ms: number): Promise<void> {
+        return timers.setTimeout(ms);
+    }
+
+    toMention(id: string): string {
+        return `<@${id}>`;
     }
 }

@@ -15,10 +15,12 @@
         }
     },
     "punch": {
-        "success": "💭・{{author}} memukul {{target}}!"
+        "success": "💭・{{author}} memukul {{target}}!",
+        "error": "🛑・Tidak dapat memukul diri sendiri!"
     },
     "slap": {
-        "success": "💭・{{author}} menampar {{target}}!"
+        "success": "💭・{{author}} menampar {{target}}!",
+        "error": "🛑・Tidak dapat menampar diri sendiri!"
     }, 
     "denied": {
         "slashOnly": "🛑・Gunakan (/) slash command untuk menggunakan perintah ini!",

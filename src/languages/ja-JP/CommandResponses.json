@@ -15,10 +15,12 @@
         }
     },
     "punch": {
-        "success": "💭・{{author}} が{{target}}にパンチ！"
+        "success": "💭・{{author}} が{{target}}にパンチ！",
+        "error": "🛑・Cannot punch yourself!"
     },
     "slap": {
-        "success": "💭・{{author}} が{{target}}を平手打ち！"
+        "success": "💭・{{author}} が{{target}}を平手打ち！",
+        "error": "🛑・Cannot punch yourself!"
     }, 
     "denied": {
         "slashOnly": "🛑・このコマンドを使うには(/) Slash Commandを使おう！",
