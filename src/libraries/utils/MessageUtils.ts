@@ -1,4 +1,4 @@
-import { IEmbedBuilder } from "../../structures/messages/IEmbedBuilder";
+import { IEmbedBuilder } from "../../structures";
 
 /**
  * @description Khemia message utilities.

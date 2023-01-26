@@ -10,9 +10,10 @@ import { ICommand } from "../../structures";
  */
 @ApplyOptions<ICommand.Options>({
     name: "avatar",
+    aliases: ["av"],
     description: "Displays the user avatar.",
     extendedDescription: {
-        usage: "",
+        usage: "..avatar <user> | /avatar <user>",
     },
     requiredClientPermissions: ["SendMessages"],
 })

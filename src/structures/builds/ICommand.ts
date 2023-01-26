@@ -1,6 +1,4 @@
-import { PieceContext } from "@sapphire/framework";
 import { Subcommand, SubcommandOptions } from "@sapphire/plugin-subcommands";
-import { Message } from "discord.js";
 import { MessageUtils } from "../../libraries";
 
 export interface ICommandExtendedDescription {
@@ -17,7 +15,7 @@ export abstract class ICommand extends Subcommand {
     extendedDescription: ICommandExtendedDescription;
     utils: MessageUtils;
 
-    constructor(context: PieceContext, options: ICommandOptions) {
+    constructor(context: Subcommand.Context, options: ICommandOptions) {
         super(context, { ...options });
 
         this.extendedDescription = options.extendedDescription;

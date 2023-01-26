@@ -10,6 +10,7 @@ import {
 import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, EmbedBuilder, InteractionResponse } from "discord.js";
 
+import { IListener } from "../../structures";
 import { Colors } from "../../libraries";
 
 @ApplyOptions<Listener.Options>({
@@ -17,7 +18,7 @@ import { Colors } from "../../libraries";
     once: false,
     event: Events.MessageCommandDenied,
 })
-export class MessageCommandDeniedListener extends Listener {
+export class MessageCommandDeniedListener extends IListener {
     async run(error: UserError, data: MessageCommandDeniedPayload): Promise<Message> {
         const embed: EmbedBuilder = new EmbedBuilder().setColor(Colors.error);
 
