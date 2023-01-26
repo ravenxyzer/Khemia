@@ -3,13 +3,13 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, User, EmbedBuilder } from "discord.js";
 
-import { ICommand, ICommandOptions } from "../../structures";
+import { ICommand } from "../../structures";
 import { Colors, Gifs } from "../../libraries";
 
 /**
  * @description Slap Command: Slaps someone else.
  */
-@ApplyOptions<ICommandOptions>({
+@ApplyOptions<ICommand.Options>({
     name: "slap",
     description: "Slaps someone else.",
     extendedDescription: {
