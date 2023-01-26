@@ -1,17 +1,20 @@
-import { Subcommand } from "@sapphire/plugin-subcommands";
 import { ApplyOptions } from "@sapphire/decorators";
 import { Message, EmbedBuilder } from "discord.js";
 import { resolveKey } from "@sapphire/plugin-i18next";
 
+import { ICommand } from "../../structures";
 import { Colors, Languages } from "../../libraries";
 import lang from "../../schemas/LanguageSchema";
 
 /**
  * @description Language Command: Per user bot language configuration
  */
-@ApplyOptions<Subcommand.Options>({
+@ApplyOptions<ICommand.Options>({
     name: "language",
     description: "Language configuration for this bot.",
+    extendedDescription: {
+        usage: "/language list | /language update <language> | /language reset",
+    },
     requiredClientPermissions: ["SendMessages"],
     subcommands: [
         { name: "list", chatInputRun: "showList" },
@@ -19,12 +22,11 @@ import lang from "../../schemas/LanguageSchema";
         { name: "reset", chatInputRun: "resetLanguage" },
     ],
 })
-export default class LanguageCommand extends Subcommand {
+export default class LanguageCommand extends ICommand {
     public override async messageRun(message: Message): Promise<void> {
         await message.reply({ content: await resolveKey(message, "CommandResponses:denied:slashOnly") });
     }
-
-    public async showList(interaction: Subcommand.ChatInputCommandInteraction): Promise<void> {
+    public async showList(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
         const { client } = this.container;
         await interaction.reply({
             embeds: [
@@ -45,7 +47,7 @@ export default class LanguageCommand extends Subcommand {
         });
     }
 
-    public async updateLanguage(interaction: Subcommand.ChatInputCommandInteraction): Promise<void> {
+    public async updateLanguage(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
         const language: string = interaction.options.getString("language");
         const languageCheck = await lang.findOne({
             userId: interaction.user.id,
@@ -84,7 +86,7 @@ export default class LanguageCommand extends Subcommand {
         }
     }
 
-    public async resetLanguage(interaction: Subcommand.ChatInputCommandInteraction): Promise<void> {
+    public async resetLanguage(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
         const languageCheck = await lang.findOne({
             userId: interaction.user.id,
         });
@@ -102,7 +104,7 @@ export default class LanguageCommand extends Subcommand {
         await lang.findOneAndDelete({ userId: interaction.user.id });
     }
 
-    public override registerApplicationCommands(registry: Subcommand.Registry): void {
+    public override registerApplicationCommands(registry: ICommand.Registry): void {
         registry.registerChatInputCommand(
             (builder) =>
                 builder

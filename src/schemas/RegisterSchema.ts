@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { RegisterInterface } from "../libraries/utils/Interfaces";
+import { RegisterInterface } from "../libraries/typings/Interfaces";
 
 /**
  * @description Register Schema for Mongodb

@@ -1,15 +1,20 @@
 import "@sapphire/plugin-i18next/register";
-import { LogLevel, SapphireClient } from "@sapphire/framework";
+import { container, LogLevel, SapphireClient } from "@sapphire/framework";
 import { Time } from "@sapphire/time-utilities";
 import { Partials } from "discord.js";
 import { InternationalizationContext } from "@sapphire/plugin-i18next";
 
-import language from "./schemas/LanguageSchema";
+import { Utils, InviteLink } from "../../libraries";
+import language from "../../schemas/LanguageSchema";
 
 /**
  * @description Custom client configurations
  */
 export class IClient extends SapphireClient {
+    readonly defaultPrefix: string = process.env.DEFAULT_PREFIX || "imp!";
+    readonly defaultLanguage: string = process.env.DEFAULT_LANGUAGE || "en-US";
+    utils: Utils = new Utils();
+
     public constructor() {
         super({
             allowedMentions: {
@@ -69,6 +74,8 @@ export class IClient extends SapphireClient {
                 },
             },
         });
+
+        container.utils = this.utils;
     }
 
     public login(token: string): Promise<string> {
@@ -78,4 +85,8 @@ export class IClient extends SapphireClient {
     public destroy(): void {
         return super.destroy();
     }
+
+    generateInviteLink = (): string => {
+        return InviteLink;
+    };
 }

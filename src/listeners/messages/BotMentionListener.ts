@@ -1,6 +1,8 @@
 import { Listener, Events } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
-import { Message } from "discord.js";
+import { Message, EmbedBuilder } from "discord.js";
+import { Colors } from "../../libraries";
+import { resolveKey } from "@sapphire/plugin-i18next";
 
 /**
  * @description Message when someone mention this bot.
@@ -13,9 +15,17 @@ import { Message } from "discord.js";
 export class BotMentionListener extends Listener {
     public async run(message: Message): Promise<void> {
         const client = this.container.client;
+        const owner = client.users.cache.get("387886389800337409");
         if (message.content == this.toMention(client.user.id)) {
             message.reply({
-                content: "PREFIXNYA: `..`",
+                embeds: [
+                    new EmbedBuilder().setColor(Colors.default).setDescription(
+                        await resolveKey(message, "ListenerResponses:botMention:description", {
+                            owner: owner.tag,
+                            guild: `[Genshin Impact ID](https://discord.gg/sPcbcaKyz7)`,
+                        })
+                    ),
+                ],
             });
         }
     }

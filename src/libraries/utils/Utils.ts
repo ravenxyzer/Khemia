@@ -1,55 +1,87 @@
 import timers from "node:timers/promises";
-import { resolveKey } from "@sapphire/plugin-i18next";
-import type { Command, Listener } from "@sapphire/framework";
-import type { Message } from "discord.js";
+import { UserError } from "@sapphire/framework";
 
-import { ResponseInterface } from "./Interfaces";
+export class Utils {
+    /**
+     * @description Throws a user error.
+     */
+    error(identifier: string, message: string, context?: unknown): void {
+        throw typeof identifier === "string"
+            ? new UserError({
+                  identifier: identifier,
+                  message: message,
+                  context: context,
+              })
+            : identifier;
+    }
 
-/**
- * @description Custom Utility Functions
- */
-export const Utils = {
-    capitalize: function (str: string): string {
+    /**
+     * @description Capitalize the first letter of a string.
+     */
+    capitalize(str: string): string {
         return str.charAt(0).toUpperCase() + str.slice(1);
-    },
+    }
 
-    bold: function (str: string): string {
-        return `**${str}**`;
-    },
-
-    randomArray: function (array: string[]): string {
+    /**
+     * @description Randomize a array.
+     */
+    randomArray(array: string[]): string {
         return array[Math.floor(Math.random() * array.length)];
-    },
+    }
 
-    stripUrl: function (url: string): string {
+    /**
+     * @description Strip www and top level domain from a url.
+     */
+    stripUrl(url: string): string {
         return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split("/")[0];
-    },
+    }
 
-    mapUrls: function (urls: string[]): string {
+    /**
+     * @description Map urls into a markdown links.
+     */
+    mapUrls(urls: string[]): string {
         return urls.map((url) => `[${this.stripUrl(url)}](${url})`).join(" ");
-    },
+    }
 
-    stripHtmlTags: function (str: string): string {
+    /**
+     * @description Strip HTML tags from a tag.
+     */
+    stripHtmlTags(str: string): string {
         return str.replace(/<br\s*[\/]?>/gi, "\n").replace(/<[^>]*>/gi, "");
-    },
+    }
 
-    trimString: function (str: string, length: number): string {
+    /**
+     * @description Trims a string to a certain length.
+     */
+    trimString(str: string, length: number): string {
         return str.length > length ? str.substring(0, length) + "..." : str;
-    },
+    }
 
-    msToSeconds: function (ms: number): number {
+    /**
+     * @description Convert milliseconds into seconds.
+     */
+    msToSeconds(ms: number): number {
         return ms / 1000;
-    },
+    }
 
-    secondsToMs: function (seconds: number): number {
+    /**
+     * @description Convert seconds into milliseconds.
+     */
+    secondsToMs(seconds: number): number {
         return seconds * 1000;
-    },
+    }
 
-    minutesToMs: function (minutes: number): number {
+    /**
+     * @description Convert minutes into milliseconds.
+     */
+    minutesToMs(minutes: number): number {
         return minutes * 60 * 1000;
-    },
+    }
 
-    formatTime: function (ms: number): string {
+    /**
+     * @description Format milliseconds into human readable format.
+     */
+    formatTime(ms: number): string {
         const seconds = Math.floor(ms / 1000);
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
@@ -61,15 +93,21 @@ export const Utils = {
         } else {
             return `${seconds} seconds`;
         }
-    },
+    }
 
-    pad: function (num: number, size: number): string {
+    /**
+     * @description Pad a string with a certain length.
+     */
+    pad(num: number, size: number): string {
         let s = num + "";
         while (s.length < size) s = "0" + s;
         return s;
-    },
+    }
 
-    formatTimestamp: function (ms: number): string {
+    /**
+     * @description Format miliseconds into 00:00:00 format.
+     */
+    formatTimestamp(ms: number): string {
         const seconds = Math.floor(ms / 1000);
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
@@ -81,9 +119,9 @@ export const Utils = {
         } else {
             return `${this.pad(seconds, 2)}`;
         }
-    },
+    }
 
-    wait: function (ms: number): Promise<void> {
-        return timers.setTimeout(ms);
-    },
-};
+    wait(ms: number) {
+        timers.setTimeout(ms);
+    }
+}

@@ -10,20 +10,20 @@ import { Presences, Utils } from "../../libraries";
  * @description Khemia Ready Listener
  */
 @ApplyOptions<Listener.Options>({
-    name: "ready",
+    name: "Ready",
     once: false,
     event: Events.ClientReady,
 })
 export class ReadyListener extends Listener {
     public async run(): Promise<void> {
-        const { logger, client } = container;
+        const { logger, client, utils } = container;
         logger.info(`Logged in as ${client.user.tag}`);
 
         const randomizePresence = (): void => {
             client.user.setPresence({
                 activities: [
                     {
-                        name: Utils.randomArray(Presences),
+                        name: utils.randomArray(Presences),
                         type: ActivityType.Watching,
                     },
                 ],
@@ -36,7 +36,7 @@ export class ReadyListener extends Listener {
 
         /* Database Connection */
         mongoose
-            .connect(process.env.MONGO_URI)
+            .connect(process.env.DATABASE_URL)
             .then(() => {
                 logger.info(`${client.user.tag} already connected to the database.`);
             })
