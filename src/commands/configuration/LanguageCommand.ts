@@ -4,7 +4,6 @@ import { resolveKey } from "@sapphire/plugin-i18next";
 
 import { ICommand } from "../../structures";
 import { Colors, Languages } from "../../libraries";
-import lang from "../../schemas/LanguageSchema";
 
 /**
  * @description Language Command: Per user bot language configuration
@@ -49,49 +48,57 @@ export default class LanguageCommand extends ICommand {
 
     public async updateLanguage(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
         const language: string = interaction.options.getString("language");
-        const languageCheck = await lang.findOne({
-            userId: interaction.user.id,
+        const db = await this.container.database.language.findUnique({
+            where: { userId: interaction.user.id },
         });
 
-        if (!languageCheck) {
-            if (language == process.env.DEFAULT_LANGUAGE) {
-                await interaction.reply({
-                    content: await resolveKey(interaction, "CommandResponses:language:error:isDefault"),
-                });
-            } else {
+        if (!db) {
+            if (language !== process.env.DEFAULT_LANGUAGE) {
                 await interaction.reply({
                     content: await resolveKey(interaction, "CommandResponses:language:success:updateSuccess", {
                         language,
                     }),
                 });
 
-                await new lang({
-                    userId: interaction.user.id,
-                    language,
-                }).save();
+                await this.container.database.language.create({
+                    data: {
+                        userId: interaction.user.id,
+                        language: language,
+                    },
+                });
             }
+
+            await interaction.reply({
+                content: await resolveKey(interaction, "CommandResponses:language:error:isDefault", {
+                    language,
+                }),
+            });
         }
 
-        if (languageCheck.language !== language) {
+        if (db.language !== language) {
             await interaction.reply({
                 content: await resolveKey(interaction, "CommandResponses:language:success:updateSuccess", { language }),
             });
 
-            languageCheck.language = language;
-            languageCheck.save();
-        } else {
-            await interaction.reply({
-                content: await resolveKey(interaction, "CommandResponses:language:error:isUsed"),
+            await this.container.database.language.update({
+                where: { userId: interaction.user.id },
+                data: { language: language },
             });
         }
+
+        await interaction.reply({
+            content: await resolveKey(interaction, "CommandResponses:language:error:isUsed"),
+        });
     }
 
     public async resetLanguage(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
-        const languageCheck = await lang.findOne({
-            userId: interaction.user.id,
+        const db = this.container.database.language.findFirst({
+            where: {
+                userId: interaction.user.id,
+            },
         });
 
-        if (!languageCheck) {
+        if (!db) {
             await interaction.reply({
                 content: await resolveKey(interaction, "CommandResponses:language:error:isDefault"),
             });
@@ -101,7 +108,9 @@ export default class LanguageCommand extends ICommand {
             content: await resolveKey(interaction, "CommandResponses:language:success:resetSuccess"),
         });
 
-        await lang.findOneAndDelete({ userId: interaction.user.id });
+        await this.container.database.language.delete({
+            where: { userId: interaction.user.id },
+        });
     }
 
     public override registerApplicationCommands(registry: ICommand.Registry): void {

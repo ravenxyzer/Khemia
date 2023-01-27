@@ -1,4 +1,5 @@
 import { Subcommand } from "@sapphire/plugin-subcommands";
+import { PrismaClient } from "@prisma/client";
 import { IDisTube } from "../Config";
 import { Utils, MusicConfig } from "..";
 import * as Preconditions from "../../preconditions";
@@ -29,6 +30,6 @@ declare module "discord.js" {
 declare module "@sapphire/pieces" {
     interface Container {
         utils: Utils;
-        database: Database;
+        database: PrismaClient;
     }
 }

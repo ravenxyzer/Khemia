@@ -3,9 +3,9 @@ import { container, LogLevel, SapphireClient } from "@sapphire/framework";
 import { Time } from "@sapphire/time-utilities";
 import { Partials } from "discord.js";
 import { InternationalizationContext } from "@sapphire/plugin-i18next";
+import { PrismaClient } from "@prisma/client";
 
 import { Utils, InviteLink } from "../../libraries";
-import language from "../../schemas/LanguageSchema";
 
 /**
  * @description Custom client configurations
@@ -14,6 +14,7 @@ export class IClient extends SapphireClient {
     readonly defaultPrefix: string = process.env.DEFAULT_PREFIX || "imp!";
     readonly defaultLanguage: string = process.env.DEFAULT_LANGUAGE || "en-US";
     utils: Utils = new Utils();
+    database: PrismaClient = new PrismaClient();
 
     public constructor() {
         super({
@@ -29,15 +30,17 @@ export class IClient extends SapphireClient {
             enableLoaderTraceLoggings: false,
             i18n: {
                 fetchLanguage: async (context: InternationalizationContext) => {
-                    const languageCheck = await language.findOne({
-                        userId: context.user.id,
+                    const db = await this.database.language.findFirst({
+                        where: {
+                            userId: context.user.id,
+                        },
                     });
 
-                    if (!languageCheck) {
+                    if (!db) {
                         return process.env.DEFAULT_LANGUAGE ?? "en-US";
                     }
 
-                    return languageCheck.language;
+                    return db.language;
                 },
             },
             intents: [
@@ -76,6 +79,7 @@ export class IClient extends SapphireClient {
         });
 
         container.utils = this.utils;
+        container.database = this.database;
     }
 
     public login(token: string): Promise<string> {

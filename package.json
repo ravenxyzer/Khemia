@@ -15,11 +15,11 @@
     "dayjs": "^1.11.7",
     "discord.js": "^14.7.1",
     "distube": "^4.0.4",
-    "dotenv": "^16.0.3",
-    "mongoose": "^6.8.0"
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
-    "@sapphire/ts-config": "^3.3.4"
+    "@sapphire/ts-config": "^3.3.4",
+    "prisma": "^4.9.0"
   },
   "name": "khemia",
   "version": "1.0.0",

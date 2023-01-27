@@ -1,16 +1,16 @@
-generator client {
-    provider = "prisma-client-js"
-}
-
 datasource db {
     provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
-model User {
-    userId String @id @map("_id")
-    uid    String
-    cookie String @unique
+generator client {
+    provider = "prisma-client-js"
+}
 
-    @@map("User-Register")
+model language {
+    id       String @id @default(auto()) @map("_id") @db.ObjectId
+    userId   String @unique
+    language String
+
+    @@map("User-Language")
 }
