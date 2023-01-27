@@ -25,6 +25,7 @@ export default class LanguageCommand extends ICommand {
     public override async messageRun(message: Message): Promise<void> {
         await message.reply({ content: await resolveKey(message, "CommandResponses:denied:slashOnly") });
     }
+
     public async showList(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
         const { client } = this.container;
         await interaction.reply({
@@ -93,9 +94,7 @@ export default class LanguageCommand extends ICommand {
 
     public async resetLanguage(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
         const db = this.container.database.language.findFirst({
-            where: {
-                userId: interaction.user.id,
-            },
+            where: { userId: interaction.user.id },
         });
 
         if (!db) {
