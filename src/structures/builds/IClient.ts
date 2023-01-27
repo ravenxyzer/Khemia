@@ -31,15 +31,10 @@ export class IClient extends SapphireClient {
             i18n: {
                 fetchLanguage: async (context: InternationalizationContext) => {
                     const db = await this.database.language.findFirst({
-                        where: {
-                            userId: context.user.id,
-                        },
+                        where: { userId: context.user.id },
                     });
 
-                    if (!db) {
-                        return process.env.DEFAULT_LANGUAGE ?? "en-US";
-                    }
-
+                    if (!db) return process.env.DEFAULT_LANGUAGE ?? "en-US";
                     return db.language;
                 },
             },
