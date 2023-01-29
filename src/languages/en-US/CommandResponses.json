@@ -25,5 +25,8 @@
     "denied": {
         "slashOnly": "🛑・Use (/) slash command for using this command!",
         "noTarget": "🛑・Please provide a target!"
+    },
+    "join": {
+        "success": "✅・Successfully joined the voice channel!"
     }
 }

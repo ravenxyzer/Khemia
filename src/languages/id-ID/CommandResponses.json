@@ -25,5 +25,8 @@
     "denied": {
         "slashOnly": "🛑・Gunakan (/) slash command untuk menggunakan perintah ini!",
         "noTarget": "🛑・Tolong tentukan seorang target!"
+    },
+    "join": {
+        "success": "✅・"
     }
 }

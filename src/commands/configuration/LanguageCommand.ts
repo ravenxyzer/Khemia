@@ -39,7 +39,7 @@ export default class LanguageCommand extends ICommand {
                     })
                     .setDescription(
                         await resolveKey(interaction, "CommandResponses:language:listDescription", {
-                            languages: Languages.join(", "),
+                            languages: "\n" + Languages.join("\n"),
                         })
                     )
                     .setColor(Colors.default),

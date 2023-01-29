@@ -20,23 +20,35 @@ import { Colors } from "../../libraries";
 })
 export class MessageCommandDeniedListener extends IListener {
     async run(error: UserError, data: MessageCommandDeniedPayload): Promise<Message> {
-        const embed: EmbedBuilder = new EmbedBuilder().setColor(Colors.error);
+        const embed: EmbedBuilder = this.utils.embed().isErrorEmbed(true);
 
         switch (error.identifier) {
             case Identifiers.PreconditionCooldown:
-                embed.setDescription(await resolveKey(data.message, "CooldownIndentifier:Response"));
+                embed.setDescription(await resolveKey(data.message, "UserErrorResponses:cooldown"));
                 return data.message.reply({ embeds: [embed] });
 
             case Identifiers.PreconditionClientPermissions || Identifiers.PreconditionClientPermissionsNoPermissions:
-                embed.setDescription(await resolveKey(data.message, "ClientPermissionsIndentifier:Response"));
+                embed.setDescription(await resolveKey(data.message, "UserErrorResponses:clientNoPerms"));
                 return data.message.reply({ embeds: [embed] });
 
             case Identifiers.PreconditionUserPermissions || Identifiers.PreconditionUserPermissionsNoPermissions:
-                embed.setDescription(await resolveKey(data.message, "UserPermissionsIndentifier:Response"));
+                embed.setDescription(await resolveKey(data.message, "UserErrorResponses:userNoPerms"));
+                return data.message.reply({ embeds: [embed] });
+
+            case Identifiers.PreconditionOwnerOnly:
+                embed.setDescription(await resolveKey(data.message, "UserErrorResponses:ownerOnly"));
+                return data.message.reply({ embeds: [embed] });
+
+            case Identifiers.PreconditionDevsOnly:
+                embed.setDescription(await resolveKey(data.message, "UserErrorResponses:devsOnly"));
+                return data.message.reply({ embeds: [embed] });
+
+            case Identifiers.PreconditionInVoiceOnly:
+                embed.setDescription(await resolveKey(data.message, "UserErrorResponses:inVoiceOnly"));
                 return data.message.reply({ embeds: [embed] });
 
             default:
-                embed.setDescription(error.message);
+                embed.setDescription(`🛑・${error.identifier} | ${error.message}`);
                 return data.message.reply({ embeds: [embed] });
         }
     }
@@ -52,15 +64,15 @@ export class ChatInputCommandDeniedListener extends Listener {
         const embed: EmbedBuilder = new EmbedBuilder().setColor(Colors.error);
         switch (error.identifier) {
             case Identifiers.PreconditionCooldown:
-                embed.setDescription(await resolveKey(data.interaction.guild, "CooldownIndentifier:Response"));
+                embed.setDescription(await resolveKey(data.interaction.guild, "UserErrorResponses:cooldown"));
                 return data.interaction.reply({ embeds: [embed] });
 
             case Identifiers.PreconditionClientPermissions || Identifiers.PreconditionClientPermissionsNoPermissions:
-                embed.setDescription(await resolveKey(data.interaction.guild, "ClientPermissionsIndentifier:Response"));
+                embed.setDescription(await resolveKey(data.interaction.guild, "UserErrorResponses:clientNoPerms"));
                 return data.interaction.reply({ embeds: [embed] });
 
             case Identifiers.PreconditionUserPermissions || Identifiers.PreconditionUserPermissionsNoPermissions:
-                embed.setDescription(await resolveKey(data.interaction.guild, "UserPermissionsIndentifier:Response"));
+                embed.setDescription(await resolveKey(data.interaction.guild, "UserErrorResponses:userNoPerms"));
                 return data.interaction.reply({ embeds: [embed] });
 
             default:

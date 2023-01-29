@@ -25,5 +25,8 @@
     "denied": {
         "slashOnly": "🛑・このコマンドを使うには(/) Slash Commandを使おう！",
         "noTarget": "🛑・ターゲットを教えてください！"
+    },
+    "join": {
+        "success": "✅・"
     }
 }

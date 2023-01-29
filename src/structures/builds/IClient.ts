@@ -1,10 +1,12 @@
 import "@sapphire/plugin-i18next/register";
 import { container, LogLevel, SapphireClient } from "@sapphire/framework";
 import { Time } from "@sapphire/time-utilities";
-import { Partials } from "discord.js";
 import { InternationalizationContext } from "@sapphire/plugin-i18next";
 import { PrismaClient } from "@prisma/client";
+import { DisTube } from "distube";
+import { Partials } from "discord.js";
 
+import { IDistube } from "..";
 import { Utils, InviteLink } from "../../libraries";
 
 /**

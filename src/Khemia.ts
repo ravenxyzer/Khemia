@@ -1,4 +1,8 @@
 import "dotenv/config";
+import { IClient, IDistube } from "./structures";
+import { container } from "@sapphire/framework";
 
-import { IClient } from "./structures";
-new IClient().login(process.env.TOKEN);
+const client = new IClient();
+container.distube = new IDistube(client);
+
+client.login(process.env.TOKEN);

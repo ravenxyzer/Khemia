@@ -1,0 +1,8 @@
+{
+    "cooldown": "🛑・Currently the command you are using is on cooldown!",
+    "clientNoPerms": "🛑・Cannot run this command because bot has no permissions!",
+    "userNoPerms": "🛑・Cannot run this command because user doesn't have permission!",
+    "inVoiceOnly": "🛑・Cannot run this command because you are not in voice channel!",
+    "ownerOnly": "🛑・Only owner can run this command!",
+    "devsOnly": "🛑・Only developer team can run this command!"
+}

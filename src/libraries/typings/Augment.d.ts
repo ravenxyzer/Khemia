@@ -1,6 +1,7 @@
 import { Subcommand } from "@sapphire/plugin-subcommands";
 import { PrismaClient } from "@prisma/client";
-import { IDisTube } from "../Config";
+import { DisTube } from "distube";
+
 import { Utils, MusicConfig } from "..";
 import * as Preconditions from "../../preconditions";
 
@@ -8,11 +9,13 @@ declare module "@sapphire/framework" {
     interface Preconditions {
         DevsOnly: never;
         OwnerOnly: never;
+        InVoiceOnly: never;
     }
 
     const enum Identifiers {
-        DevsOnly = "preconditionDeveloperOnly",
-        OwnerOnly = "preconditionOwnerOnly",
+        PreconditionDevsOnly = "preconditionDeveloperOnly",
+        PreconditionOwnerOnly = "preconditionOwnerOnly",
+        PreconditionInVoiceOnly = "preconditionInVoiceOnly",
     }
 }
 
@@ -31,5 +34,6 @@ declare module "@sapphire/pieces" {
     interface Container {
         utils: Utils;
         database: PrismaClient;
+        distube: DisTube;
     }
 }
