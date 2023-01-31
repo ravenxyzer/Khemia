@@ -4,7 +4,7 @@
     },
     "language": {
         "name": "{{name}}のコマンドリスト",
-        "listDescription": "個人の言語設定は `/language update` を使用して変更できます。\n**利用可能な言語:** {{languages}}",
+        "listDescription": "個人の言語設定は `/language update` を使用して変更できます。\n**利用可能な言語:**\n{{languages}}",
         "success": {
             "updateSuccess": "✅・言語を `{{language}}` に変更しました！",
             "resetSuccess": "✅・言語をデフォルトに戻すことに成功！"
@@ -28,5 +28,8 @@
     },
     "join": {
         "success": "✅・"
+    },
+    "play": {
+        "description": "▶️・音楽を再生:\nㅤ ・{{song}} - ` [{{duration}}] `"
     }
 }

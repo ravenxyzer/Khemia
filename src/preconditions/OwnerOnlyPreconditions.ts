@@ -16,7 +16,6 @@ export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
             ? this.ok()
             : this.error({
                   identifier: "preconditionOwnerOnly",
-                  message: "⛔・*Only owner can run this command!",
               });
     }
 
@@ -25,7 +24,6 @@ export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
             ? this.ok()
             : this.error({
                   identifier: "preconditionOwnerOnly",
-                  message: "⛔・Only owner can run this command!",
               });
     }
 
@@ -34,7 +32,6 @@ export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
             ? this.ok()
             : this.error({
                   identifier: "preconditionOwnerOnly",
-                  message: "⛔・Only owner can run this command!",
               });
     }
 }

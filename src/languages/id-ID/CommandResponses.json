@@ -4,7 +4,7 @@
     },
     "language": {
         "name": "List Perintah {{name}}",
-        "listDescription": "Preferensi bahasa pribadi anda dapat diubah menggunakan `/language update`.\n**Bahasa yang tersedia:** {{languages}}",
+        "listDescription": "Preferensi bahasa pribadi anda dapat diubah menggunakan `/language update`.\n**Bahasa yang tersedia:**\n{{languages}}",
         "success": {
             "updateSuccess": "✅・Berhasil mengubah bahasa menjadi `{{language}}`!",
             "resetSuccess": "✅・Berhasil mengatur ulang bahasa ke default!"
@@ -28,5 +28,8 @@
     },
     "join": {
         "success": "✅・"
+    },
+    "play": {
+        "description": "▶️・Mulai diputar:\nㅤ ・{{song}} - ` [{{duration}}] `"
     }
 }

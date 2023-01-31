@@ -13,9 +13,11 @@ import { ICommand } from "../../structures";
     aliases: ["av"],
     description: "Displays the user avatar.",
     extendedDescription: {
-        usage: "..avatar <user> | /avatar <user>",
+        usage: "avatar <user>",
     },
     requiredClientPermissions: ["SendMessages"],
+    requiredUserPermissions: ["SendMessages"],
+    runIn: ["GUILD_ANY"],
 })
 export class AvatarCommand extends ICommand {
     public override async messageRun(message: Message, args: Args): Promise<void> {
@@ -52,16 +54,5 @@ export class AvatarCommand extends ICommand {
 
     private toMention(id: string): string {
         return `<@${id}>`;
-    }
-
-    public registerApplicationCommands(registry: ICommand.Registry): void {
-        registry.registerChatInputCommand(
-            (builder) =>
-                builder
-                    .setName(this.name)
-                    .setDescription(this.description)
-                    .addUserOption((option) => option.setName("user").setDescription("Provide a user!")),
-            { idHints: ["1065203077856112660"] }
-        );
     }
 }

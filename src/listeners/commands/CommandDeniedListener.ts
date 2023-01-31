@@ -75,6 +75,18 @@ export class ChatInputCommandDeniedListener extends Listener {
                 embed.setDescription(await resolveKey(data.interaction.guild, "UserErrorResponses:userNoPerms"));
                 return data.interaction.reply({ embeds: [embed] });
 
+            case Identifiers.PreconditionOwnerOnly:
+                embed.setDescription(await resolveKey(data.interaction, "UserErrorResponses:ownerOnly"));
+                return data.interaction.reply({ embeds: [embed] });
+
+            case Identifiers.PreconditionDevsOnly:
+                embed.setDescription(await resolveKey(data.interaction, "UserErrorResponses:devsOnly"));
+                return data.interaction.reply({ embeds: [embed] });
+
+            case Identifiers.PreconditionInVoiceOnly:
+                embed.setDescription(await resolveKey(data.interaction, "UserErrorResponses:inVoiceOnly"));
+                return data.interaction.reply({ embeds: [embed] });
+
             default:
                 embed.setDescription(error.message);
                 return data.interaction.reply({ embeds: [embed] });

@@ -16,7 +16,6 @@ export class DevsOnlyPrecondition extends AllFlowsPrecondition {
             ? this.ok()
             : this.error({
                   identifier: "preconditionDeveloperOnly",
-                  message: "⛔・Only development team can run this command!",
               });
     }
 
@@ -25,7 +24,6 @@ export class DevsOnlyPrecondition extends AllFlowsPrecondition {
             ? this.ok()
             : this.error({
                   identifier: "preconditionDeveloperOnly",
-                  message: "⛔・Only development team can run this command!",
               });
     }
 
@@ -34,7 +32,6 @@ export class DevsOnlyPrecondition extends AllFlowsPrecondition {
             ? this.ok()
             : this.error({
                   identifier: "preconditionDeveloperOnly",
-                  message: "⛔・Only development team can run this command!",
               });
     }
 }

@@ -6,16 +6,14 @@ import { Message, User, EmbedBuilder } from "discord.js";
 import { ICommand } from "../../structures";
 import { Colors, Gifs } from "../../libraries";
 
-/**
- * @description Slap Command: Slaps someone else.
- */
 @ApplyOptions<ICommand.Options>({
     name: "slap",
     description: "Slaps someone else.",
     extendedDescription: {
-        usage: "",
+        usage: "slap <user>",
     },
     requiredClientPermissions: ["SendMessages"],
+    requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
 })
 export class PunchCommand extends ICommand {

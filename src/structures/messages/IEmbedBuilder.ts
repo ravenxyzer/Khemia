@@ -17,4 +17,12 @@ export class IEmbedBuilder extends EmbedBuilder {
 
         return this;
     }
+
+    isSuccessEmbed(value: boolean): this {
+        if (value) {
+            this.setColor(Colors.success);
+        }
+
+        return this;
+    }
 }

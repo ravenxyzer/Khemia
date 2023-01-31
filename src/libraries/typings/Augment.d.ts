@@ -4,6 +4,7 @@ import { DisTube } from "distube";
 
 import { Utils, MusicConfig } from "..";
 import * as Preconditions from "../../preconditions";
+import { IDatabase, IDistube } from "structures";
 
 declare module "@sapphire/framework" {
     interface Preconditions {
@@ -33,7 +34,7 @@ declare module "discord.js" {
 declare module "@sapphire/pieces" {
     interface Container {
         utils: Utils;
-        database: PrismaClient;
-        distube: DisTube;
+        database: IDatabase;
+        distube: IDistube;
     }
 }

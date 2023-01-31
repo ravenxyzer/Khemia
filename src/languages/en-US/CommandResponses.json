@@ -4,7 +4,7 @@
     },
     "language": {
         "name": "{{name}}'s Command List",
-        "listDescription": "Your personal language preferences can be changed using `/language update`.\n**Available languages:** {{languages}}",
+        "listDescription": "Your personal language preferences can be changed using `/language update`.\n**Available languages:**\n{{languages}}",
         "success": {
             "updateSuccess": "✅・Successfully changed the language to `{{language}}`!",
             "resetSuccess": "✅・Succesfully reset the language to default!"
@@ -28,5 +28,8 @@
     },
     "join": {
         "success": "✅・Successfully joined the voice channel!"
+    }, 
+    "play": {
+        "description": "▶️・**Started playing:**\nㅤ ・{{song}} - ` [{{duration}}] `"
     }
 }

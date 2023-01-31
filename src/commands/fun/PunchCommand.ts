@@ -6,16 +6,14 @@ import { Message, User } from "discord.js";
 import { ICommand } from "../../structures";
 import { Gifs } from "../../libraries";
 
-/**
- * @description Punch Command: Punches someone else.
- */
 @ApplyOptions<ICommand.Options>({
     name: "punch",
     description: "Punches someone else.",
     extendedDescription: {
-        usage: "",
+        usage: "punch <user>",
     },
     requiredClientPermissions: ["SendMessages"],
+    requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
 })
 export class PunchCommand extends ICommand {

@@ -3,15 +3,15 @@ import { SpotifyPlugin } from "@distube/spotify";
 import { SoundCloudPlugin } from "@distube/soundcloud";
 import { YtDlpPlugin } from "@distube/yt-dlp";
 import { container } from "@sapphire/framework";
-import { GuildTextBasedChannel, Message } from "discord.js";
+import { GuildTextBasedChannel, Message, CommandInteraction } from "discord.js";
 
 import { Emojis } from "../../libraries";
 import { IClient, IEmbedBuilder } from "..";
+import { resolveKey } from "@sapphire/plugin-i18next";
 
-/**
- * @description DisTube client configurations
- */
 export class IDistube extends DisTube {
+    context: Message | CommandInteraction;
+
     public constructor(client: IClient) {
         super(client, {
             leaveOnStop: false,
@@ -21,15 +21,14 @@ export class IDistube extends DisTube {
             plugins: [new SpotifyPlugin({ emitEventsAfterFetching: true }), new SoundCloudPlugin(), new YtDlpPlugin()],
         });
 
-        super.on("playSong", (queue: Queue, song: Song<unknown>) =>
-            // `${Emojis.music.play} | Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${
-            //     song.user
-            // }\n${container.utils.status(queue)}`,
+        super.on("playSong", async (queue: Queue, song: Song<unknown>) =>
             queue.textChannel.send({
-                content: `${Emojis.music.play} | Playing: **${song.name}** - \`${song.formattedDuration}\``,
                 embeds: [
                     new IEmbedBuilder().setDescription(
-                        `> Requested by ${song.user}\n> ${container.utils.status(queue)}`
+                        await resolveKey(this.context, "CommandResponses:play:description", {
+                            song: container.utils.trimString(song.name, 55),
+                            duration: queue.formattedDuration,
+                        })
                     ),
                 ],
             })
@@ -62,5 +61,9 @@ export class IDistube extends DisTube {
         );
 
         super.on("finish", (queue: Queue) => queue.textChannel.send("Finished!"));
+    }
+
+    public setContext(ctx: Message | CommandInteraction): Message<boolean> | CommandInteraction {
+        return (this.context = ctx);
     }
 }
