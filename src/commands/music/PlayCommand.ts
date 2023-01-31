@@ -1,10 +1,7 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Args } from "@sapphire/framework";
-import { resolveKey } from "@sapphire/plugin-i18next";
 import { GuildMember, GuildTextBasedChannel, Message, VoiceBasedChannel } from "discord.js";
-import { Queue, Song } from "distube";
 
-import { Emojis } from "../../libraries";
 import { ICommand } from "../../structures";
 
 @ApplyOptions<ICommand.Options>({

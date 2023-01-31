@@ -1,6 +1,7 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, VoiceBasedChannel } from "discord.js";
+
 import { ICommand } from "../../structures";
 
 @ApplyOptions<ICommand.Options>({

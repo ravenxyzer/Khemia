@@ -1,10 +1,10 @@
 import { Args } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { resolveKey } from "@sapphire/plugin-i18next";
-import { Message, User, EmbedBuilder } from "discord.js";
+import { Message, User } from "discord.js";
 
 import { ICommand } from "../../structures";
-import { Colors, Gifs } from "../../libraries";
+import { Gifs } from "../../libraries";
 
 @ApplyOptions<ICommand.Options>({
     name: "slap",

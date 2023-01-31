@@ -1,9 +1,9 @@
 import { ApplyOptions } from "@sapphire/decorators";
-import { Message, EmbedBuilder } from "discord.js";
+import { Message } from "discord.js";
 import { resolveKey } from "@sapphire/plugin-i18next";
 
 import { ICommand } from "../../structures";
-import { Colors, Languages } from "../../libraries";
+import { Languages } from "../../libraries";
 
 @ApplyOptions<ICommand.Options>({
     name: "language",
