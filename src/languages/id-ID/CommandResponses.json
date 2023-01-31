@@ -30,6 +30,6 @@
         "success": "✅・"
     },
     "play": {
-        "description": "▶️・Mulai diputar:\nㅤ ・{{song}} - ` [{{duration}}] `"
+        "description": "▶️・**Mulai diputar:**\nㅤ ・{{song}} - ` [{{duration}}] `"
     }
 }

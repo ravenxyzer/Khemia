@@ -48,8 +48,7 @@ export default class LanguageCommand extends ICommand {
                         await resolveKey(interaction, "CommandResponses:language:listDescription", {
                             languages: Languages.join("\n"),
                         })
-                    )
-                    .setColor(Colors.default),
+                    ),
             ],
         });
     }

@@ -24,12 +24,17 @@ export class IDistube extends DisTube {
         super.on("playSong", async (queue: Queue, song: Song<unknown>) =>
             queue.textChannel.send({
                 embeds: [
-                    new IEmbedBuilder().setDescription(
-                        await resolveKey(this.context, "CommandResponses:play:description", {
-                            song: container.utils.trimString(song.name, 55),
-                            duration: queue.formattedDuration,
-                        })
-                    ),
+                    new IEmbedBuilder()
+                        .setDescription(
+                            await resolveKey(this.context, "CommandResponses:play:description", {
+                                song: container.utils.trimString(song.name, 55),
+                                duration: queue.formattedDuration,
+                            })
+                        )
+                        .setFooter({
+                            text: container.utils.status(queue),
+                            iconURL: container.client.user.displayAvatarURL({ size: 512 }),
+                        }),
                 ],
             })
         );

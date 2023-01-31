@@ -30,6 +30,6 @@
         "success": "✅・"
     },
     "play": {
-        "description": "▶️・音楽を再生:\nㅤ ・{{song}} - ` [{{duration}}] `"
+        "description": "▶️・**ss音楽を再生:**\nㅤ ・{{song}} - ` [{{duration}}] `"
     }
 }
