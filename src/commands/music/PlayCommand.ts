@@ -1,6 +1,6 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Args } from "@sapphire/framework";
-import { GuildMember, GuildTextBasedChannel, Message, VoiceBasedChannel } from "discord.js";
+import { GuildMember, GuildTextBasedChannel, Message } from "discord.js";
 
 import { ICommand } from "../../structures";
 
