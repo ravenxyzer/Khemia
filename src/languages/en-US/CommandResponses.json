@@ -2,6 +2,13 @@
     "avatar": {
         "success": "👤・This is {{user}}'s avatar(s)!"
     },
+    "denied": {
+        "slashOnly": "🛑・Use (/) slash command for using this command!",
+        "noTarget": "🛑・Please provide a target!"
+    },
+    "join": {
+        "success": "✅・Successfully joined the voice channel!"
+    },
     "language": {
         "name": "{{name}}'s Command List",
         "listDescription": "Your personal language preferences can be changed using `/language update`.\n**Available languages:**\n{{languages}}",
@@ -22,14 +29,9 @@
         "success": "💭・{{author}} slaps {{target}}!",
         "error": "🛑・Cannot slap yourself!"
     }, 
-    "denied": {
-        "slashOnly": "🛑・Use (/) slash command for using this command!",
-        "noTarget": "🛑・Please provide a target!"
-    },
-    "join": {
-        "success": "✅・Successfully joined the voice channel!"
-    }, 
-    "play": {
-        "description": "▶️・**Started playing:**\nㅤ ・{{song}} - ` [{{duration}}] `"
+    "queue": {
+        "title": "⫸  Song Queue",
+        "description": "**Playing:**  ",
+        "error": "🛑・There is nothing playing!"
     }
 }

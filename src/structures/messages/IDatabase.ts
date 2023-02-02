@@ -1,16 +1,16 @@
 import { model, Schema } from "mongoose";
-import { languageDatabaseType, languageModelType } from "../../libraries";
+import { languageDatabaseInterface } from "../../libraries";
 
 const languageModel = model(
     "language",
-    new Schema<languageDatabaseType>({
+    new Schema<languageDatabaseInterface>({
         userId: { type: String },
         language: { type: String },
     })
 );
 
 export class IDatabase {
-    language: languageModelType;
+    language: typeof languageModel;
     public constructor() {
         this.language = languageModel;
     }

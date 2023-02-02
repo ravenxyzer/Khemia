@@ -69,11 +69,7 @@ export const Gifs = {
 /**
  * @description Khemia available Language list
  */
-export const Languages: string[] = [
-    ":flag_us: American English `en-US`",
-    ":flag_id: Bahasa Indonesia `id-ID`",
-    ":flag_jp: Standard Japanese `ja-JP`",
-];
+export const Languages: string[] = [":flag_us: American English `en-US`", ":flag_id: Bahasa Indonesia `id-ID`"];
 
 /**
  * @description Music command configuration

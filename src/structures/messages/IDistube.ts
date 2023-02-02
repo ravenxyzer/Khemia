@@ -1,13 +1,12 @@
-import { DisTube, Queue, Song, Playlist } from "distube";
+import { container } from "@sapphire/framework";
+import { resolveKey } from "@sapphire/plugin-i18next";
+import { GuildTextBasedChannel, Message, CommandInteraction } from "discord.js";
+import { DisTube, Queue, Song, Playlist, formatDuration } from "distube";
 import { SpotifyPlugin } from "@distube/spotify";
 import { SoundCloudPlugin } from "@distube/soundcloud";
 import { YtDlpPlugin } from "@distube/yt-dlp";
-import { container } from "@sapphire/framework";
-import { GuildTextBasedChannel, Message, CommandInteraction } from "discord.js";
 
-import { Emojis } from "../../libraries";
 import { IClient, IEmbedBuilder } from "..";
-import { resolveKey } from "@sapphire/plugin-i18next";
 
 export class IDistube extends DisTube {
     context: Message | CommandInteraction;
@@ -17,55 +16,109 @@ export class IDistube extends DisTube {
             leaveOnStop: false,
             emitNewSongOnly: true,
             emitAddSongWhenCreatingQueue: false,
-            emitAddListWhenCreatingQueue: false,
+            emitAddListWhenCreatingQueue: true,
             plugins: [new SpotifyPlugin({ emitEventsAfterFetching: true }), new SoundCloudPlugin(), new YtDlpPlugin()],
         });
 
-        super.on("playSong", async (queue: Queue, song: Song<unknown>) =>
-            queue.textChannel.send({
-                embeds: [
-                    new IEmbedBuilder()
-                        .setDescription(
-                            await resolveKey(this.context, "CommandResponses:play:description", {
-                                song: container.utils.trimString(song.name, 55),
-                                duration: queue.formattedDuration,
+        super.on(
+            "playSong",
+            async (queue: Queue, song: Song<unknown>) =>
+                await queue.textChannel.send({
+                    embeds: [
+                        new IEmbedBuilder()
+                            .setDescription(
+                                await resolveKey(this.context, "DistubeResponses:playSong:success", {
+                                    name: container.utils.trimString(song.name, 35),
+                                    url: song.url,
+                                    duration: song.formattedDuration,
+                                })
+                            )
+                            .setFooter({ text: `Status: ${container.utils.status(queue)}` }),
+                    ],
+                })
+        );
+
+        super.on(
+            "addList",
+            async (queue: Queue, playlist: Playlist<unknown>) =>
+                await queue.textChannel.send({
+                    embeds: [
+                        new IEmbedBuilder().setDescription(
+                            await resolveKey(this.context, "DistubeResponses:addList:success", {
+                                name: playlist.name,
+                                length: playlist.songs.length,
                             })
-                        )
-                        .setFooter({
-                            text: container.utils.status(queue),
-                            iconURL: container.client.user.displayAvatarURL({ size: 512 }),
-                        }),
-                ],
-            })
+                        ),
+                    ],
+                })
         );
 
-        super.on("addSong", (queue: Queue, song: Song<unknown>) =>
-            queue.textChannel.send(
-                `${Emojis.music.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
-            )
+        super.on(
+            "addSong",
+            async (queue: Queue, song: Song<unknown>) =>
+                await queue.textChannel.send({
+                    embeds: [
+                        new IEmbedBuilder().setDescription(
+                            await resolveKey(this.context, "DistubeResponses:addSong:success", {
+                                name: container.utils.trimString(song.name, 35),
+                                duration: song.formattedDuration,
+                            })
+                        ),
+                    ],
+                })
         );
 
-        super.on("addList", (queue: Queue, playlist: Playlist<unknown>) =>
-            queue.textChannel.send(
-                `${Emojis.music.success} | Added \`${playlist.name}\` playlist (${
-                    playlist.songs.length
-                } songs) to queue\n${container.utils.status(queue)}`
-            )
-        );
-
-        super.on("error", (channel: GuildTextBasedChannel, error: Error) => {
+        super.on("error", async (channel: GuildTextBasedChannel, error: Error) => {
             if (channel)
-                channel.send(`${Emojis.music.error} | An error encountered: ${error.toString().slice(0, 1974)}`);
+                await channel.send({
+                    embeds: [
+                        new IEmbedBuilder().isErrorEmbed(true).setDescription(
+                            await resolveKey(this.context, "DistubeResponses:error:response", {
+                                error: error.toString().slice(0, 1974),
+                            })
+                        ),
+                    ],
+                });
             else console.error(error);
         });
 
-        super.on("empty", (queue: Queue) => queue.textChannel.send("Voice channel is empty! Leaving the channel..."));
-
-        super.on("searchNoResult", (message: Message<true>, query: string) =>
-            message.channel.send(`${Emojis.music.error} | No result found for \`${query}\`!`)
+        super.on(
+            "empty",
+            async (queue: Queue) =>
+                await queue.textChannel.send({
+                    embeds: [
+                        new IEmbedBuilder().setDescription(
+                            await resolveKey(this.context, "DistubeResponses:empty:response")
+                        ),
+                    ],
+                })
         );
 
-        super.on("finish", (queue: Queue) => queue.textChannel.send("Finished!"));
+        super.on(
+            "searchNoResult",
+            async (message: Message<true>, query: string) =>
+                await message.channel.send({
+                    embeds: [
+                        new IEmbedBuilder()
+                            .isErrorEmbed(true)
+                            .setDescription(
+                                await resolveKey(this.context, "DistubeResponses:error:searchNoResult", { query })
+                            ),
+                    ],
+                })
+        );
+
+        super.on(
+            "finish",
+            async (queue: Queue) =>
+                await queue.textChannel.send({
+                    embeds: [
+                        new IEmbedBuilder().setDescription(
+                            await resolveKey(this.context, "DistubeResponses:finish:success")
+                        ),
+                    ],
+                })
+        );
     }
 
     public setContext(ctx: Message | CommandInteraction): Message<boolean> | CommandInteraction {

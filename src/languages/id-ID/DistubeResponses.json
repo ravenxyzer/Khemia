@@ -1,0 +1,21 @@
+{
+    "addList": {
+        "success": "▶️・Menambahkan playlist {{name}} - ({{length}} songs)"
+    },
+    "addSong": {
+        "success": "☑️・Menambahkan {{name}} - `[{{duration}}]` ke antrean."
+    },
+    "empty": {
+        "response": "💭・Voice channel kosong! Meninggalkan channel..."
+    },
+    "error": {
+        "response": "🛑・Terjadi kesalahan:\n```{{error}}```",
+        "searchNoResult": "🛑・Tidak ada hasil yang ditemukan untuk: `{{query}}`"
+    },
+    "finish": {
+        "success": "☑️・Selesai!"
+    },
+    "playSong": {
+        "success": "▶️・Mulai memutar [{{name}}]({{url}}) - `[{{duration}}]`"
+    }
+}

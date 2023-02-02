@@ -172,8 +172,7 @@ export default class LanguageCommand extends ICommand {
                                     .setRequired(true)
                                     .addChoices(
                                         { name: "English US (en-US)", value: "en-US" },
-                                        { name: "Indonesia (id-ID)", value: "id-ID" },
-                                        { name: "日本語 (ja-JP)", value: "ja-JP" }
+                                        { name: "Indonesia (id-ID)", value: "id-ID" }
                                     )
                             )
                     )

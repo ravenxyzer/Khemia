@@ -7,9 +7,6 @@ import mongoose from "mongoose";
 import { IListener } from "../../structures";
 import { Presences } from "../../libraries";
 
-/**
- * @description Khemia Ready Listener
- */
 @ApplyOptions<IListener.Options>({
     name: "Ready",
     once: false,

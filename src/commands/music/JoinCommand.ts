@@ -36,7 +36,6 @@ export class JoinCommand extends ICommand {
         ctx: Message | ICommand.ChatInputCommandInteraction,
         channel: VoiceBasedChannel
     ): Promise<void> {
-        void this.container.distube.setContext(ctx);
         void this.container.distube.voices.join(channel);
 
         await ctx.reply({

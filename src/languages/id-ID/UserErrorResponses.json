@@ -1,8 +1,8 @@
 {
-    "cooldown": "🛑・Saat ini command yang kamu gunakan sedang cooldown!",
     "clientNoPerms": "🛑・Tidak dapat menjalankan command karena bot tidak memiliki izin!",
-    "userNoPerms": "🛑・Tidak dapat menjalankan command karena pengguna tidak memiliki izin!",
+    "cooldown": "🛑・Saat ini command yang kamu gunakan sedang cooldown!",
+    "devsOnly": "🛑・Hanya tim pengembang yang dapat menjalankan command ini!",
     "inVoiceOnly": "🛑・Tidak dapat menjalankan command karena Anda tidak berada di voice channel!",
     "ownerOnly": "🛑・Hanya pemilik yang dapat menjalankan command ini!",
-    "devsOnly": "🛑・Hanya tim pengembang yang dapat menjalankan command ini!"
+    "userNoPerms": "🛑・Tidak dapat menjalankan command karena pengguna tidak memiliki izin!"
 }

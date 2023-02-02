@@ -1,9 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 import { Colors } from "../../libraries";
 
-/**
- * @description Khemia custom embed builder.
- */
 export class IEmbedBuilder extends EmbedBuilder {
     public constructor() {
         super();
