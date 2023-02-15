@@ -66,7 +66,7 @@ export class IClient extends SapphireClient {
                 level: LogLevel.Debug,
             },
             partials: [Partials.Channel, Partials.GuildMember, Partials.Message, Partials.Reaction],
-            typing: true,
+            typing: false,
             ws: {
                 properties: {
                     browser: "Discord iOS",

@@ -21,17 +21,34 @@
             "isDefault": "🛑・Anda sudah menggunakan bahasa default!"
         }
     },
+    "play": {
+        "success": "✅・Berhasil menambahkan lagu ke antrean!"
+    },
     "punch": {
         "success": "💭・{{author}} memukul {{target}}!",
         "error": "🛑・Tidak dapat memukul diri sendiri!"
+    },
+    "skip": {
+        "success": "✅・Berhasil men-skip musik yang dimainkan!",
+        "error": {
+            "response": "🛑・Terjadi kesalahan:\n```{{error}}```",
+            "noQueue": "🛑・Tidak dapat men-skip musik, tidak ada antrean!"
+        }
     },
     "slap": {
         "success": "💭・{{author}} menampar {{target}}!",
         "error": "🛑・Tidak dapat menampar diri sendiri!"
     },
     "queue": {
-        "title": "⫸  Antrean Lagu",
-        "description": "**Memainkan:**  ",
+        "title": "⫸  Antrean Musik",
+        "description": "**Memutar:**  ",
         "error": "🛑・Tidak ada musik yang dimainkan!"
+    },
+    "volume": {
+        "success": "✅・Berhasil merubah volume menjadi {{volume}}",
+        "error": {
+            "volumeError": "🛑・Tidak dapat merubah volume, angka tidak valid (Maks: `200`)",
+            "noQueue": "🛑・Tidak dapat merubah volume, tidak ada antrean!"
+        }
     }
 }

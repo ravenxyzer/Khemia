@@ -21,17 +21,34 @@
             "isDefault": "🛑・You already using the default language!"
         }
     },
+    "play": {
+        "success": "✅・Succesfully added the song to queue!"
+    },
     "punch": {
         "success": "💭・{{author}} punches {{target}}!",
         "error": "🛑・Cannot punch yourself!"
+    },
+    "skip": {
+        "success": "✅・Succesfully skipped the music!",
+        "error": {
+            "response": "🛑・An error encountered:\n```{{error}}```",
+            "noQueue": "🛑・Cannot skip the music, there is no queue!"
+        }
     },
     "slap": {
         "success": "💭・{{author}} slaps {{target}}!",
         "error": "🛑・Cannot slap yourself!"
     }, 
     "queue": {
-        "title": "⫸  Song Queue",
+        "title": "⫸  Music Queue",
         "description": "**Playing:**  ",
         "error": "🛑・There is nothing playing!"
+    },
+    "volume": {
+        "success": "✅・Successfully changed the volume to {{volume}}",
+        "error": {
+            "volumeError": "🛑・Unable to change volume, invalid number (Max: `200`)",
+            "noQueue": "🛑・Unable to change volume, no queue!"
+        }
     }
 }

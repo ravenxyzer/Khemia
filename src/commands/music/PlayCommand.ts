@@ -1,5 +1,6 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Args } from "@sapphire/framework";
+import { resolveKey } from "@sapphire/plugin-i18next";
 import { GuildMember, GuildTextBasedChannel, Message } from "discord.js";
 
 import { ICommand } from "../../structures";
@@ -7,7 +8,7 @@ import { ICommand } from "../../structures";
 @ApplyOptions<ICommand.Options>({
     name: "play",
     aliases: ["p"],
-    description: "Plays your favorite music.",
+    description: "Play your favorite music.",
     extendedDescription: {
         usage: "play <song>",
     },
@@ -28,7 +29,7 @@ export class PlayCommand extends ICommand {
         const member: GuildMember = interaction.guild.members.cache.get(interaction.user.id);
 
         void this.play(interaction, song, member);
-        await interaction.reply({ content: "✅・Successfully added the song!", ephemeral: true });
+        await interaction.reply({ content: await resolveKey(interaction, "CommandResponses:play:success") });
     }
 
     public override async registerApplicationCommands(registry: ICommand.Registry): Promise<void> {

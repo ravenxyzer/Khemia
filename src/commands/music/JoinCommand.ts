@@ -6,7 +6,7 @@ import { ICommand } from "../../structures";
 
 @ApplyOptions<ICommand.Options>({
     name: "join",
-    description: "Joins to voice channel.",
+    description: "Join to voice channel.",
     extendedDescription: {
         usage: "join",
     },

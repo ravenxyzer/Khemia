@@ -7,11 +7,11 @@ import { ICommand } from "../../structures";
 @ApplyOptions<ICommand.Options>({
     name: "queue",
     aliases: ["q"],
-    description: "Displays the queue of songs currently playing.",
+    description: "Display the queue of the songs currently playing.",
     extendedDescription: {
         usage: "queue",
     },
-    requiredClientPermissions: ["SendMessages", "Speak", "Connect"],
+    requiredClientPermissions: ["SendMessages"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
 })
@@ -40,7 +40,7 @@ export class QueueCommand extends ICommand {
         const songs = queue.songs
             .map(
                 (song, i) =>
-                    `${i === 0 ? text : `${i}.`} ${this.container.utils.trimString(song.name, 35)} - \`${
+                    `${i === 0 ? text : `${i}.`} [${this.container.utils.trimString(song.name, 35)}](${song.url}) - \`${
                         song.formattedDuration
                     }\``
             )

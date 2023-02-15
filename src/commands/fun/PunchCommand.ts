@@ -8,7 +8,7 @@ import { Gifs } from "../../libraries";
 
 @ApplyOptions<ICommand.Options>({
     name: "punch",
-    description: "Punches someone else.",
+    description: "Punch someone else.",
     extendedDescription: {
         usage: "punch <user>",
     },

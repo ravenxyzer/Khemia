@@ -1,7 +1,7 @@
 import { container } from "@sapphire/framework";
 import { resolveKey } from "@sapphire/plugin-i18next";
 import { GuildTextBasedChannel, Message, CommandInteraction } from "discord.js";
-import { DisTube, Queue, Song, Playlist, formatDuration } from "distube";
+import { DisTube, Queue, Song, Playlist } from "distube";
 import { SpotifyPlugin } from "@distube/spotify";
 import { SoundCloudPlugin } from "@distube/soundcloud";
 import { YtDlpPlugin } from "@distube/yt-dlp";

@@ -159,12 +159,12 @@ export default class LanguageCommand extends ICommand {
                     .setName(this.name)
                     .setDescription(this.description)
                     .addSubcommand((subcommand) =>
-                        subcommand.setName("list").setDescription("Displays available languages for this bot.")
+                        subcommand.setName("list").setDescription("Display available languages for this bot.")
                     )
                     .addSubcommand((subcommand) =>
                         subcommand
                             .setName("update")
-                            .setDescription("Updates the language to the provided one.")
+                            .setDescription("Update the language to the provided one.")
                             .addStringOption((option) =>
                                 option
                                     .setName("language")
@@ -177,7 +177,7 @@ export default class LanguageCommand extends ICommand {
                             )
                     )
                     .addSubcommand((subcommand) =>
-                        subcommand.setName("reset").setDescription("Resets the language to the default one.")
+                        subcommand.setName("reset").setDescription("Reset the language to the default one.")
                     ),
             { idHints: ["1056492429857009724"] }
         );
