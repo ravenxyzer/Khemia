@@ -15,7 +15,7 @@ import { ICommand } from "../../structures";
     requiredClientPermissions: ["SendMessages", "Speak", "Connect"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
-    preconditions: ["InVoiceOnly"],
+    preconditions: ["InVoiceOnly", "OwnerOnly"],
 })
 export class PlayCommand extends ICommand {
     public override async messageRun(message: Message, args: Args): Promise<void> {

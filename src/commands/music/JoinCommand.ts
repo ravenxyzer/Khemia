@@ -13,7 +13,7 @@ import { ICommand } from "../../structures";
     requiredClientPermissions: ["SendMessages", "Speak", "Connect"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
-    preconditions: ["InVoiceOnly"],
+    preconditions: ["InVoiceOnly", "OwnerOnly"],
 })
 export class JoinCommand extends ICommand {
     public override async messageRun(message: Message): Promise<void> {
