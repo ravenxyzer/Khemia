@@ -18,6 +18,7 @@ export class IDistube extends DisTube {
             emitAddSongWhenCreatingQueue: false,
             emitAddListWhenCreatingQueue: true,
             plugins: [new SpotifyPlugin({ emitEventsAfterFetching: true }), new SoundCloudPlugin(), new YtDlpPlugin()],
+            youtubeCookie: process.env.YOUTUBE_COOKIE,
         });
 
         super.on(
