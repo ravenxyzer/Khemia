@@ -4,7 +4,7 @@ import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, User } from "discord.js";
 
 import { ICommand } from "../../structures";
-import { Gifs } from "../../libraries";
+import { Gifs, Developers } from "../../libraries";
 
 @ApplyOptions<ICommand.Options>({
     name: "punch",
@@ -15,20 +15,15 @@ import { Gifs } from "../../libraries";
     requiredClientPermissions: ["SendMessages"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
+    cooldownFilteredUsers: [Developers[0]],
 })
 export class PunchCommand extends ICommand {
     public override async messageRun(message: Message, args: Args): Promise<void> {
-        const author: User = message.author;
-        const target = await args.pick("user");
-
-        await this.punch(message, author, target);
+        await this.punch(message, message.author, await args.pick("user"));
     }
 
-    public override async chatInputRun(ctx: ICommand.ChatInputCommandInteraction): Promise<void> {
-        const author: User = ctx.user;
-        const target: User = ctx.options.getUser("user");
-
-        await this.punch(ctx, author, target);
+    public override async chatInputRun(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
+        await this.punch(interaction, interaction.user, interaction.options.getUser("user"));
     }
 
     private async punch(
@@ -61,8 +56,13 @@ export class PunchCommand extends ICommand {
                 builder
                     .setName(this.name)
                     .setDescription(this.description)
+                    .setDescriptionLocalizations({ id: "Pukul orang lain." })
                     .addUserOption((option) =>
-                        option.setName("user").setDescription("Provide a user.").setRequired(true)
+                        option
+                            .setName("user")
+                            .setDescription("Specify a user!")
+                            .setDescriptionLocalizations({ id: "Tentukan user!" })
+                            .setRequired(true)
                     ),
             { idHints: ["1065548771771043850"] }
         );

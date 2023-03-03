@@ -4,10 +4,8 @@ import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, User, GuildMember } from "discord.js";
 
 import { ICommand } from "../../structures";
+import { Developers } from "../../libraries";
 
-/**
- * @description Avatar Command: Displays the user avatar.
- */
 @ApplyOptions<ICommand.Options>({
     name: "avatar",
     aliases: ["av"],
@@ -18,6 +16,7 @@ import { ICommand } from "../../structures";
     requiredClientPermissions: ["SendMessages"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
+    cooldownFilteredUsers: [Developers[0]],
 })
 export class AvatarCommand extends ICommand {
     public override async messageRun(message: Message, args: Args): Promise<void> {
@@ -54,5 +53,23 @@ export class AvatarCommand extends ICommand {
 
     private toMention(id: string): string {
         return `<@${id}>`;
+    }
+
+    public registerApplicationCommands(registry: ICommand.Registry): void {
+        registry.registerChatInputCommand(
+            (builder) =>
+                builder
+                    .setName(this.name)
+                    .setDescription(this.description)
+                    .setDescriptionLocalizations({ id: "Menampilkan avatar user." })
+                    .addUserOption((option) =>
+                        option
+                            .setName("user")
+                            .setDescription("Specify a user!")
+                            .setDescriptionLocalizations({ id: "Tentukan user!" })
+                            .setRequired(false)
+                    ),
+            { idHints: ["1065203077856112660"] }
+        );
     }
 }

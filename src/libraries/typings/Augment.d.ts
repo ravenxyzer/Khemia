@@ -1,10 +1,9 @@
 import { Subcommand } from "@sapphire/plugin-subcommands";
 import { PrismaClient } from "@prisma/client";
-import { DisTube } from "distube";
 
 import { Utils, MusicConfig } from "..";
 import * as Preconditions from "../../preconditions";
-import { IDatabase, IDistube } from "structures";
+import { IDatabase } from "structures";
 
 declare module "@sapphire/framework" {
     interface Preconditions {
@@ -35,6 +34,5 @@ declare module "@sapphire/pieces" {
     interface Container {
         utils: Utils;
         database: IDatabase;
-        distube: IDistube;
     }
 }

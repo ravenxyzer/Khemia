@@ -4,7 +4,7 @@ import { resolveKey } from "@sapphire/plugin-i18next";
 import { Message, User } from "discord.js";
 
 import { ICommand } from "../../structures";
-import { Gifs } from "../../libraries";
+import { Gifs, Developers } from "../../libraries";
 
 @ApplyOptions<ICommand.Options>({
     name: "slap",
@@ -15,20 +15,15 @@ import { Gifs } from "../../libraries";
     requiredClientPermissions: ["SendMessages"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
+    cooldownFilteredUsers: [Developers[0]],
 })
 export class PunchCommand extends ICommand {
     public override async messageRun(message: Message, args: Args): Promise<void> {
-        const author: User = message.author;
-        const target: User = await args.pick("user");
-
-        await this.slap(message, author, target);
+        await this.slap(message, message.author, await args.pick("user"));
     }
 
     public override async chatInputRun(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
-        const author: User = interaction.user;
-        const target: User = interaction.options.getUser("user");
-
-        await this.slap(interaction, author, target);
+        await this.slap(interaction, interaction.user, interaction.options.getUser("user"));
     }
 
     private async slap(ctx: Message | ICommand.ChatInputCommandInteraction, author: User, target: User): Promise<void> {
@@ -57,8 +52,13 @@ export class PunchCommand extends ICommand {
                 builder
                     .setName(this.name)
                     .setDescription(this.description)
+                    .setDescriptionLocalizations({ id: "Tampar orang lain." })
                     .addUserOption((option) =>
-                        option.setName("user").setDescription("Provide a user.").setRequired(true)
+                        option
+                            .setName("user")
+                            .setDescription("Specify a user.")
+                            .setDescriptionLocalizations({ id: "Tentukan user!" })
+                            .setRequired(true)
                     ),
             { idHints: ["1065548773390041108"] }
         );

@@ -70,17 +70,3 @@ export const Gifs = {
  * @description Khemia available Language list
  */
 export const Languages: string[] = [":flag_us: American English `en-US`", ":flag_id: Bahasa Indonesia `id-ID`"];
-
-/**
- * @description Music command configuration
- */
-export const Emojis = {
-    music: {
-        play: "▶️",
-        stop: "⏹️",
-        queue: "📄",
-        success: "☑️",
-        repeat: "🔁",
-        error: "❌",
-    },
-};

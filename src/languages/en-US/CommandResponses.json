@@ -2,12 +2,13 @@
     "avatar": {
         "success": "👤・This is {{user}}'s avatar(s)!"
     },
+    "balance": {
+        "success": "💵・This is {{user}}'s balance.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n> **Khemy** : `{{balance}}`",
+        "failed": "🛑・{{user}} Khemia's account is not registered."
+    },
     "denied": {
         "slashOnly": "🛑・Use (/) slash command for using this command!",
         "noTarget": "🛑・Please provide a target!"
-    },
-    "join": {
-        "success": "✅・Successfully joined the voice channel!"
     },
     "language": {
         "name": "{{name}}'s Command List",
@@ -21,34 +22,19 @@
             "isDefault": "🛑・You already using the default language!"
         }
     },
-    "play": {
-        "success": "✅・Succesfully added the song to queue!"
+    "ping": {
+        "success": "🏓・{{client}}'s latency is `{{ms}}ms`.."
     },
     "punch": {
         "success": "💭・{{author}} punches {{target}}!",
         "error": "🛑・Cannot punch yourself!"
     },
-    "skip": {
-        "success": "✅・Succesfully skipped the music!",
-        "error": {
-            "response": "🛑・An error encountered:\n```{{error}}```",
-            "noQueue": "🛑・Cannot skip the music, there is no queue!"
-        }
+    "register": {
+        "success": "✅・Successfully register your {{client}} account.",
+        "failed": "🛑・Your Khemia account has been registered!"
     },
     "slap": {
         "success": "💭・{{author}} slaps {{target}}!",
         "error": "🛑・Cannot slap yourself!"
-    }, 
-    "queue": {
-        "title": "⫸  Music Queue",
-        "description": "**Playing:**  ",
-        "error": "🛑・There is nothing playing!"
-    },
-    "volume": {
-        "success": "✅・Successfully changed the volume to {{volume}}",
-        "error": {
-            "volumeError": "🛑・Unable to change volume, invalid number (Max: `200`)",
-            "noQueue": "🛑・Unable to change volume, no queue!"
-        }
     }
 }

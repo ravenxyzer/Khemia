@@ -1,19 +1,22 @@
 import { ApplyOptions } from "@sapphire/decorators";
-import { Message } from "discord.js";
+import { Time } from "@sapphire/time-utilities";
 import { resolveKey } from "@sapphire/plugin-i18next";
+import { Message } from "discord.js";
 
 import { ICommand } from "../../structures";
-import { Languages } from "../../libraries";
+import { Languages, Developers } from "../../libraries";
 
 @ApplyOptions<ICommand.Options>({
     name: "language",
-    description: "Language configuration for this bot.",
+    description: "Language configuration on Khemia.",
     extendedDescription: {
         usage: "language list | language update <language> | language reset",
     },
     requiredClientPermissions: ["SendMessages"],
     requiredUserPermissions: ["SendMessages"],
     runIn: ["GUILD_ANY"],
+    cooldownFilteredUsers: [Developers[0]],
+    cooldownDelay: Time.Minute * 15,
     subcommands: [
         { name: "list", chatInputRun: "showList" },
         { name: "update", chatInputRun: "updateLanguage" },
@@ -74,7 +77,7 @@ export default class LanguageCommand extends ICommand {
                     ],
                 });
 
-                this.container.database.language.create({
+                await this.container.database.language.create({
                     userId: interaction.user.id,
                     language,
                 });
@@ -123,7 +126,7 @@ export default class LanguageCommand extends ICommand {
     }
 
     public async resetLanguage(interaction: ICommand.ChatInputCommandInteraction): Promise<void> {
-        const db = this.container.database.language.findOne({
+        const db = await this.container.database.language.findOne({
             userId: interaction.user.id,
         });
 
@@ -158,17 +161,23 @@ export default class LanguageCommand extends ICommand {
                 builder
                     .setName(this.name)
                     .setDescription(this.description)
+                    .setDescriptionLocalizations({ id: "Konfigurasi bahasa pada Khemia." })
                     .addSubcommand((subcommand) =>
-                        subcommand.setName("list").setDescription("Display available languages for this bot.")
+                        subcommand
+                            .setName("list")
+                            .setDescription("Display available languages.")
+                            .setDescriptionLocalizations({ id: "Menampilkan bahasa yang tersedia." })
                     )
                     .addSubcommand((subcommand) =>
                         subcommand
                             .setName("update")
                             .setDescription("Update the language to the provided one.")
+                            .setDescriptionLocalizations({ id: "Perbarui bahasa ke bahasa yang disediakan." })
                             .addStringOption((option) =>
                                 option
                                     .setName("language")
-                                    .setDescription("Provide your language.")
+                                    .setDescription("Specify your language!")
+                                    .setDescriptionLocalizations({ id: "Tentukan bahasa anda!" })
                                     .setRequired(true)
                                     .addChoices(
                                         { name: "English US (en-US)", value: "en-US" },
@@ -177,7 +186,10 @@ export default class LanguageCommand extends ICommand {
                             )
                     )
                     .addSubcommand((subcommand) =>
-                        subcommand.setName("reset").setDescription("Reset the language to the default one.")
+                        subcommand
+                            .setName("reset")
+                            .setDescription("Reset the language to the default one.")
+                            .setDescriptionLocalizations({ id: "Setel ulang bahasa ke bahasa default." })
                     ),
             { idHints: ["1056492429857009724"] }
         );

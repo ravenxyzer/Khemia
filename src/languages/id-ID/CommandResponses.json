@@ -2,16 +2,17 @@
     "avatar": {
         "success": "👤・Ini adalah avatarnya {{user}}!"
     },
+    "balance": {
+        "success": "💵・Ini adalah saldo **{{user}}.**\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n> **Khemy** : `{{balance}}`",
+        "failed": "🛑・Akun Khemia {{user}} tidak terdaftar."
+    },
     "denied": {
         "slashOnly": "🛑・Gunakan (/) slash command untuk menggunakan perintah ini!",
         "noTarget": "🛑・Tolong tentukan seorang target!"
     },
-    "join": {
-        "success": "✅・"
-    },
     "language": {
         "name": "List Perintah {{name}}",
-        "listDescription": "Preferensi bahasa pribadi anda dapat diubah menggunakan `/language update`.\n**Bahasa yang tersedia:**\n{{languages}}",
+        "listDescription": "Preferensi bahasa pribadi Anda dapat diubah menggunakan `/language update`.\n**Bahasa yang tersedia:**\n{{languages}}",
         "success": {
             "updateSuccess": "✅・Berhasil mengubah bahasa menjadi `{{language}}`!",
             "resetSuccess": "✅・Berhasil mengatur ulang bahasa ke default!"
@@ -21,34 +22,19 @@
             "isDefault": "🛑・Anda sudah menggunakan bahasa default!"
         }
     },
-    "play": {
-        "success": "✅・Berhasil menambahkan lagu ke antrean!"
+    "ping": {
+        "success": "🏓・{{client}} latensi adalah `{{ms}}ms`."
     },
     "punch": {
         "success": "💭・{{author}} memukul {{target}}!",
         "error": "🛑・Tidak dapat memukul diri sendiri!"
     },
-    "skip": {
-        "success": "✅・Berhasil men-skip musik yang dimainkan!",
-        "error": {
-            "response": "🛑・Terjadi kesalahan:\n```{{error}}```",
-            "noQueue": "🛑・Tidak dapat men-skip musik, tidak ada antrean!"
-        }
+    "register": {
+        "success": "✅・Berhasil mendaftar akun khemia Anda.",
+        "failed": "🛑・Akun Khemia Anda telah terdaftar"
     },
     "slap": {
         "success": "💭・{{author}} menampar {{target}}!",
         "error": "🛑・Tidak dapat menampar diri sendiri!"
-    },
-    "queue": {
-        "title": "⫸  Antrean Musik",
-        "description": "**Memutar:**  ",
-        "error": "🛑・Tidak ada musik yang dimainkan!"
-    },
-    "volume": {
-        "success": "✅・Berhasil merubah volume menjadi {{volume}}",
-        "error": {
-            "volumeError": "🛑・Tidak dapat merubah volume, angka tidak valid (Maks: `200`)",
-            "noQueue": "🛑・Tidak dapat merubah volume, tidak ada antrean!"
-        }
     }
 }

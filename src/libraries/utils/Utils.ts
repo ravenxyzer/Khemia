@@ -1,6 +1,6 @@
 import timers from "node:timers/promises";
 import { UserError } from "@sapphire/framework";
-import { Queue } from "distube";
+import { CharactersTypes } from "../../libraries";
 
 export class Utils {
     /**
@@ -130,9 +130,11 @@ export class Utils {
         return `<@${id}>`;
     }
 
-    status(queue: Queue): string {
-        return `Volume: ${queue.volume}%  |  Filter: ${queue.filters.names.join(", ") || "Off"}  |  Loop: ${
-            queue.repeatMode ? (queue.repeatMode === 2 ? "All Queue" : "This Song") : "Off"
-        }  |  Autoplay: ${queue.autoplay ? "On" : "Off"}`;
+    randomGacha(array: CharactersTypes[]): {
+        name: string;
+        rarity: string;
+        image: string;
+    } {
+        return array[Math.floor(Math.random() * array.length)];
     }
 }

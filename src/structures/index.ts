@@ -3,5 +3,5 @@ export * from "./builds/ICommand";
 export * from "./builds/IListener";
 
 export * from "./messages/IEmbedBuilder";
-export * from "./messages/IDistube";
-export * from "./messages/IDatabase";
+
+export * from "./database/IDatabase";
